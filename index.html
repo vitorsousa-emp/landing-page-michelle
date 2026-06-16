@@ -1,0 +1,227 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#0D0D0D" />
+  <title>WS Eventos — Celebrações que se tornam memórias</title>
+  <meta name="description" content="WS Eventos: produção de eventos sociais e corporativos de alto padrão. Cada detalhe pensado para transformar momentos especiais em experiências inesquecíveis." />
+  <meta property="og:title" content="WS Eventos — Celebrações que se tornam memórias" />
+  <meta property="og:description" content="Eventos sociais e corporativos com curadoria, sofisticação e cuidado com cada detalhe." />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="images/hero-event.jpg" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:image" content="images/hero-event.jpg" />
+  <link rel="icon" type="image/png" href="images/ws-logo.png" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600&family=Inter:wght@300;400;500;600&family=Allura&display=swap" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+  <!-- ============== LOADING SCREEN ============== -->
+  <div id="loading" class="loading" aria-hidden="true">
+    <div class="loading__inner">
+      <img src="images/ws-logo.png" alt="WS Eventos" class="loading__logo" />
+      <div class="loading__bar"><div class="loading__bar-fill"></div></div>
+      <span class="loading__label">WS Eventos</span>
+    </div>
+  </div>
+
+  <!-- ============== NAV ============== -->
+  <header id="nav" class="nav">
+    <div class="nav__inner">
+      <a href="#top" class="nav__brand">
+        <img src="images/ws-logo.png" alt="WS Eventos" />
+        <span>WS Eventos</span>
+      </a>
+      <a class="btn-ghost-gold nav__cta" href="https://wa.me/558587669268?text=Ol%C3%A1!%20Gostaria%20de%20solicitar%20um%20or%C3%A7amento%20para%20meu%20evento." target="_blank" rel="noreferrer">Orçamento</a>
+    </div>
+  </header>
+
+  <main id="top">
+
+    <!-- ============== HERO ============== -->
+    <section class="hero">
+      <div class="hero__bg">
+        <img src="images/hero-event.jpg" alt="Mesa de evento sofisticada à luz de velas" class="hero__img" />
+        <div class="hero__overlay-1"></div>
+        <div class="hero__overlay-2"></div>
+      </div>
+
+      <div class="particles" id="particles" aria-hidden="true"></div>
+
+      <div class="hero__content">
+        <img src="images/ws-logo.png" alt="WS Eventos" class="hero__logo" />
+        <span class="hero__eyebrow">— Eventos de formatura —</span>
+        <h1 class="hero__title">
+          <span>Transformamos momentos especiais</span>
+          <span class="italic text-shimmer">em experiências inesquecíveis.</span>
+        </h1>
+        <p class="hero__sub">Cada detalhe importa. Cada formação merece ser única.</p>
+        <div class="hero__cta">
+          <a href="#contato" class="btn-gold"><span>✦</span> Solicitar orçamento</a>
+          <a href="#video" class="btn-ghost-gold"><span aria-hidden="true">▶</span> Assistir apresentação</a>
+        </div>
+        <div class="hero__scroll">
+          <span>Role</span>
+          <div class="hero__scroll-line"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============== ABOUT ============== -->
+    <section class="section section--about">
+      <div class="container container--md reveal">
+        <p class="eyebrow">— Sobre nós —</p>
+        <h2 class="h2 center">Mais do que eventos.<br /><span class="italic text-shimmer">Criamos memórias.</span></h2>
+      </div>
+
+      <div class="container container--md about__grid">
+        <div class="reveal about__img-wrap" data-delay="100">
+          <img src="images/about-event.jpg" alt="Brinde com taças de champanhe" loading="lazy" class="about__img" />
+          <span class="frame frame--outer"></span>
+          <span class="frame frame--inner"></span>
+        </div>
+        <div class="reveal about__text" data-delay="200">
+          <p class="about__lead">Cada formatura representa o encerramento de uma jornada única e o início de novos caminhos. Por isso, acreditamos que <span class="gold">esse momento merece ser vivido com emoção</span>, segurança e perfeição. Com atenção aos mínimos detalhes, a Ws Eventos cria celebrações à altura da grande conquista que é chegar até aqui.</p>
+          <div class="divider-gold"></div>
+          <div class="stats">
+            <div><div class="stats__n">+6.400</div><div class="stats__l">Eventos realizados</div></div>
+            <div><div class="stats__n">52k</div><div class="stats__l">clientes atendidos</div></div>
+            <div><div class="stats__n">5★</div><div class="stats__l">Avaliação</div></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============== SERVICES ============== -->
+    <section class="section section--services">
+      <div class="container container--lg reveal">
+        <p class="eyebrow">— O que fazemos —</p>
+        <h2 class="h2 center">Serviços <span class="italic text-shimmer">sob medida</span></h2>
+      </div>
+
+      <div class="container container--lg services__grid" id="services-grid">
+        <!-- cards injected by JS -->
+      </div>
+    </section>
+
+    <!-- ============== VIDEO ============== -->
+    <section id="video" class="section">
+      <div class="container container--md reveal">
+        <p class="eyebrow">— Experiência —</p>
+        <h2 class="h2 center">Conheça a experiência <span class="italic text-shimmer">WS Eventos</span></h2>
+      </div>
+      <div class="container container--md reveal" data-delay="150">
+        <button type="button" class="video__card" id="video-open">
+          <img src="images/gallery-1.jpg" alt="Apresentação WS Eventos" loading="lazy" class="video__img" />
+          <div class="video__overlay"></div>
+          <span class="video__play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span>
+          <div class="video__caption">
+            <div class="video__eyebrow">Apresentação</div>
+            <div class="video__title">Assista em 90 segundos</div>
+          </div>
+        </button>
+      </div>
+    </section>
+
+    <!-- ============== TESTIMONIALS ============== -->
+    <section class="section section--testimonials">
+      <div class="container container--sm reveal">
+        <p class="eyebrow">— Mensagens recebidas —</p>
+        <h2 class="h2 center">Histórias de <span class="italic text-shimmer">quem viveu</span></h2>
+        <p class="testimonials__sub">Recados reais de clientes, recebidos após cada evento.</p>
+      </div>
+      <div class="container container--sm messages" id="messages"></div>
+      <div class="container container--sm reveal messages__footer">· entregue hoje ·</div>
+    </section>
+
+    <!-- ============== DIFFERENTIALS ============== -->
+    <section class="section">
+      <div class="container container--md reveal">
+        <p class="eyebrow">— Diferenciais —</p>
+        <h2 class="h2 center">Por que escolher <span class="italic text-shimmer">a WS Eventos?</span></h2>
+      </div>
+      <div class="container container--md diffs" id="diffs"></div>
+    </section>
+
+    <!-- ============== GALLERY ============== -->
+    <section class="section section--gallery">
+      <div class="container container--lg reveal">
+        <p class="eyebrow">— Galeria —</p>
+        <h2 class="h2 center">Momentos que <span class="italic text-shimmer">ficaram para sempre</span></h2>
+      </div>
+      <div class="container container--lg gallery" id="gallery"></div>
+    </section>
+
+    <!-- ============== FINAL CTA ============== -->
+    <section id="contato" class="final-cta">
+      <div class="final-cta__bg">
+        <img src="images/hero-event.jpg" alt="" aria-hidden="true" loading="lazy" />
+        <div class="final-cta__overlay-1"></div>
+        <div class="final-cta__overlay-2"></div>
+      </div>
+      <div class="final-cta__content">
+        <div class="reveal"><span class="script">Vamos celebrar</span></div>
+        <div class="reveal" data-delay="100"><h2 class="h2 h2--xl">O seu evento merece ser <span class="italic text-shimmer">inesquecível.</span></h2></div>
+        <div class="reveal" data-delay="200"><p class="final-cta__p">Permita que especialistas cuidem de cada detalhe enquanto você vive cada momento ao lado das pessoas que ama.</p></div>
+        <div class="reveal" data-delay="300">
+          <a href="https://wa.me/5500000000000?text=Ol%C3%A1!%20Gostaria%20de%20solicitar%20um%20or%C3%A7amento%20para%20meu%20evento." target="_blank" rel="noreferrer" class="btn-gold final-cta__btn">✦ Solicitar orçamento agora</a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ============== FOOTER ============== -->
+  <footer class="footer">
+    <div class="container container--md footer__inner">
+      <img src="images/ws-logo.png" alt="WS Eventos" class="footer__logo" />
+      <div class="divider-gold footer__divider"></div>
+      <p class="footer__p">Obrigado por considerar a WS Eventos para fazer parte de um dos momentos mais importantes da sua história.</p>
+
+      <div class="footer__socials">
+        <a href="https://instagram.com/wseventos" target="_blank" rel="noreferrer" aria-label="Instagram" class="social">
+          <svg viewBox="0 0 24 24"><path d="M12 2.2c3.2 0 3.6 0 4.8.1 1.2.1 1.8.2 2.2.4.6.2 1 .5 1.5 1s.8.9 1 1.5c.2.4.3 1 .4 2.2.1 1.2.1 1.6.1 4.8s0 3.6-.1 4.8c-.1 1.2-.2 1.8-.4 2.2-.2.6-.5 1-1 1.5s-.9.8-1.5 1c-.4.2-1 .3-2.2.4-1.2.1-1.6.1-4.8.1s-3.6 0-4.8-.1c-1.2-.1-1.8-.2-2.2-.4-.6-.2-1-.5-1.5-1s-.8-.9-1-1.5c-.2-.4-.3-1-.4-2.2C2.2 15.6 2.2 15.2 2.2 12s0-3.6.1-4.8c.1-1.2.2-1.8.4-2.2.2-.6.5-1 1-1.5s.9-.8 1.5-1c.4-.2 1-.3 2.2-.4C8.4 2.2 8.8 2.2 12 2.2zm0 3.3a6.5 6.5 0 100 13 6.5 6.5 0 000-13zm0 10.7a4.2 4.2 0 110-8.4 4.2 4.2 0 010 8.4zm6.8-11a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0z"/></svg>
+        </a>
+        <a href="https://wa.me/5500000000000?text=Ol%C3%A1!%20Gostaria%20de%20solicitar%20um%20or%C3%A7amento%20para%20meu%20evento." target="_blank" rel="noreferrer" aria-label="WhatsApp" class="social">
+          <svg viewBox="0 0 24 24"><path d="M20.5 3.5A11 11 0 003.6 17.3L2 22l4.8-1.5A11 11 0 1020.5 3.5zM12 20a8 8 0 01-4.2-1.2l-.3-.2-2.8.9.9-2.8-.2-.3A8 8 0 1112 20zm4.5-5.9c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1s-.7.8-.8 1c-.2.2-.3.2-.5.1a6.5 6.5 0 01-3.3-2.9c-.2-.4.2-.4.6-1.2.1-.2 0-.4 0-.5-.1-.1-.6-1.4-.8-1.9-.2-.5-.4-.4-.6-.4h-.5c-.2 0-.5.1-.7.3-.3.3-1 1-1 2.4 0 1.4 1 2.7 1.2 2.9.2.2 2 3.1 5 4.2.7.3 1.3.5 1.7.6.7.2 1.4.2 1.9.1.6-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.1-1.2 0-.1-.2-.2-.4-.3z"/></svg>
+        </a>
+      </div>
+
+      <div class="footer__loc">✦ São Paulo · Brasil</div>
+
+      <div class="footer__bottom">
+        <span>© <span id="year"></span> WS Eventos</span>
+        <span>Feito com cuidado · Cada detalhe importa</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ============== FLOATING CTA ============== -->
+  <a id="float-cta" href="https://wa.me/5500000000000?text=Ol%C3%A1!%20Gostaria%20de%20solicitar%20um%20or%C3%A7amento%20para%20meu%20evento." target="_blank" rel="noreferrer" class="float-cta">
+    <span class="btn-gold float-cta__btn">
+      <svg viewBox="0 0 24 24"><path d="M20.5 3.5A11 11 0 003.6 17.3L2 22l4.8-1.5A11 11 0 1020.5 3.5zM12 20a8 8 0 01-4.2-1.2l-.3-.2-2.8.9.9-2.8-.2-.3A8 8 0 1112 20z"/></svg>
+      Quero realizar meu evento
+    </span>
+  </a>
+
+  <!-- ============== MODALS ============== -->
+  <div id="video-modal" class="modal" role="dialog" aria-modal="true" aria-hidden="true">
+    <button class="modal__close" aria-label="Fechar" data-close>✕</button>
+    <div class="modal__video">
+      <iframe id="video-iframe" title="WS Eventos" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe>
+    </div>
+  </div>
+
+  <div id="lightbox" class="modal" role="dialog" aria-modal="true" aria-hidden="true">
+    <button class="modal__close" aria-label="Fechar" data-close>✕</button>
+    <img id="lightbox-img" alt="" />
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
