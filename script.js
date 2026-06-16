@@ -2,14 +2,15 @@
    WS Eventos — interações standalone (vanilla JS, sem libs)
    ================================================================ */
 
+
 (function () {
   "use strict";
 
   const WHATSAPP_URL =
-    "https://wa.me/5500000000000?text=Ol%C3%A1!%20Gostaria%20de%20solicitar%20um%20or%C3%A7amento%20para%20meu%20evento.";
+    "https://wa.me/558587669268?text=Ol%C3%A1!%20Gostaria%20de%20solicitar%20um%20or%C3%A7amento%20para%20meu%20evento.";
 
   /* ---------- Helpers ---------- */
-  const $  = (sel, ctx = document) => ctx.querySelector(sel);
+  const $ = (sel, ctx = document) => ctx.querySelector(sel);
   const $$ = (sel, ctx = document) => Array.from(ctx.querySelectorAll(sel));
 
   document.addEventListener("DOMContentLoaded", init);
@@ -38,7 +39,7 @@
 
   /* ---------- Loading screen ---------- */
   function hideLoadingScreen() {
-    setTimeout(() => $("#loading")?.classList.add("is-hidden"), 1400);
+    setTimeout(() => $("#loading")?.classList.add("is-hidden"), 2000);
   }
 
   /* ---------- Nav scroll state ---------- */
@@ -63,17 +64,17 @@
     const COUNT = 22;
     const frag = document.createDocumentFragment();
     for (let i = 0; i < COUNT; i++) {
-      const left     = (i * 53) % 100;
-      const delay    = (i * 0.7) % 12;
+      const left = (i * 53) % 100;
+      const delay = (i * 0.7) % 12;
       const duration = 12 + ((i * 1.3) % 10);
-      const size     = 2 + (i % 4);
+      const size = 2 + (i % 4);
       const s = document.createElement("span");
-      s.style.left        = left + "%";
-      s.style.width       = size + "px";
-      s.style.height      = size + "px";
-      s.style.opacity     = "0.7";
-      s.style.boxShadow   = `0 0 ${size * 3}px var(--gold)`;
-      s.style.animation   = `float-up ${duration}s ${delay}s linear infinite`;
+      s.style.left = left + "%";
+      s.style.width = size + "px";
+      s.style.height = size + "px";
+      s.style.opacity = "0.7";
+      s.style.boxShadow = `0 0 ${size * 3}px var(--gold)`;
+      s.style.animation = `float-up ${duration}s ${delay}s linear infinite`;
       frag.appendChild(s);
     }
     wrap.appendChild(frag);
@@ -104,12 +105,12 @@
 
   /* ---------- Services (expansíveis) ---------- */
   const SERVICES = [
-    { icon: "💍", title: "Casamentos",     desc: "Do íntimo ao grandioso, cada cerimônia desenhada para refletir a história de vocês." },
-    { icon: "🎂", title: "Aniversários",   desc: "Celebrações marcantes para datas que merecem ser eternizadas." },
-    { icon: "🏢", title: "Corporativos",   desc: "Eventos institucionais com posicionamento, conforto e excelência operacional." },
-    { icon: "👶", title: "Chá Revelação",  desc: "Um momento único, conduzido com leveza, surpresa e estética impecável." },
-    { icon: "🎓", title: "Formaturas",     desc: "Festas inesquecíveis para encerrar um ciclo com toda a sofisticação que ele merece." },
-    { icon: "✨", title: "Personalizados", desc: "Conceitos exclusivos, criados a partir da sua história, do seu gosto e do seu sonho." },
+    { icon: "🪩", title: "Bandas", desc: "Animação não vai faltar e toda estrutura de palco e luz está incluída." },
+    { icon: "🍹", title: "Coqueteís ilimitados", desc: "Bar temático com drinks durante todo o evento" },
+    { icon: "🎊", title: "Decoração", desc: "Vamos criar um ambiente com muitos cenários para registrar esse dia mágico." },
+    { icon: "🎁", title: "Brindes", desc: "1. Foto do formando no painel da entrada do buffet 2. Brinde de champanhe para momento do Cerimonial 3. Prismas de identificação para sua mesa 4. Descontos especiais com nossos parceiros em aluguel de vestidos, ternos, smokings, anel, maquiagem etc." },
+    { icon: "📸", title: "Cobertura fotografica", desc: "Registre cada momento do seu evento com um fotografo proficional" },
+    { icon: "🍛", title: "buffet", desc: "Uma festa também tem que agradar o paladar dos convidados." },
   ];
 
   function renderServices() {
@@ -147,48 +148,91 @@
   }
 
   /* ---------- Testimonials (mensagens WhatsApp-like) ---------- */
+  /* ---------- Testimonials (cards arrastáveis) ---------- */
   const MESSAGES = [
-    { name: "Mariana C.",    initials: "MC", time: "depois do casamento",  text: "A WS superou todas as nossas expectativas. Foi simplesmente perfeito." },
-    { name: "Rafael & Júlia",initials: "RJ", time: "depois da cerimônia",  text: "A tranquilidade de saber que tudo estava sob controle não tem preço." },
-    { name: "Camila F.",     initials: "CF", time: "depois do aniversário",text: "Faria tudo novamente com eles. Cada detalhe foi pensado com carinho." },
-    { name: "Diretoria Vitra",initials:"DV", time: "evento corporativo",   text: "Profissionalismo absoluto. Nossos convidados ainda comentam o evento." },
+    { name: "Mariana C.",     time: "casamento",        stars: 5, text: "A WS superou todas as nossas expectativas. Foi simplesmente perfeito." },
+    { name: "Rafael & Júlia", time: "cerimônia",         stars: 5, text: "A tranquilidade de saber que tudo estava sob controle não tem preço." },
+    { name: "Camila F.",      time: "aniversário",       stars: 5, text: "Faria tudo novamente com eles. Cada detalhe foi pensado com carinho." },
+    { name: "Diretoria Vitra",time: "evento corporativo",stars: 5, text: "Profissionalismo absoluto. Nossos convidados ainda comentam o evento." },
   ];
 
   function renderMessages() {
-    const list = $("#messages");
-    if (!list) return;
-    MESSAGES.forEach((m, i) => {
-      const side = i % 2 === 0 ? "left" : "right";
-      const wrap = document.createElement("div");
-      wrap.className = "reveal";
-      wrap.dataset.delay = String(i * 100);
-      wrap.innerHTML = `
-        <button type="button" class="msg msg--${side}">
-          <div class="msg__avatar">${m.initials}</div>
-          <div class="msg__bubble">
-            <div class="msg__stars">★★★★★</div>
-            <p class="msg__text">"${m.text}"</p>
-            <div class="msg__meta">
-              <span>— ${m.name}</span>
-              <span class="dot">·</span>
-              <span class="italic">${m.time}</span>
-            </div>
-          </div>
-        </button>
+    const track = $("#testiTrack");
+    const dotsWrap = $("#testiDots");
+    if (!track) return;
+
+    MESSAGES.forEach((m) => {
+      const card = document.createElement("div");
+      card.className = "testi-card";
+      card.innerHTML = `
+        <div class="testi-card__stars">${"★".repeat(m.stars)}${"☆".repeat(5 - m.stars)}</div>
+        <p class="testi-card__text">"${m.text}"</p>
+        <div class="testi-card__footer">
+          <span class="testi-card__name">${m.name}</span>
+          <span class="dot">·</span>
+          <span>${m.time}</span>
+        </div>
       `;
-      const btn = wrap.querySelector(".msg");
-      btn.addEventListener("click", () => btn.classList.toggle("is-open"));
-      list.appendChild(wrap);
+      track.appendChild(card);
     });
+
+    // bolinhas indicadoras
+    if (dotsWrap) {
+      MESSAGES.forEach((_, i) => {
+        const d = document.createElement("span");
+        d.className = "testi-dot" + (i === 0 ? " is-active" : "");
+        dotsWrap.appendChild(d);
+      });
+    }
+
+    bindDraggableTrack(track, dotsWrap);
+  }
+
+  /* ---------- Drag-to-scroll (mouse) + swipe nativo (touch) ---------- */
+  
+  function bindDraggableTrack(track, dotsWrap) {
+    let isDown = false;
+    let startX = 0;
+    let scrollStart = 0;
+
+    // Mouse (desktop) — toque/swipe no celular já funciona nativamente via overflow-x
+    track.addEventListener("mousedown", (e) => {
+      isDown = true;
+      track.classList.add("is-dragging");
+      startX = e.pageX;
+      scrollStart = track.scrollLeft;
+    });
+    window.addEventListener("mouseup", () => {
+      isDown = false;
+      track.classList.remove("is-dragging");
+    });
+    window.addEventListener("mousemove", (e) => {
+      if (!isDown) return;
+      e.preventDefault();
+      const dx = e.pageX - startX;
+      track.scrollLeft = scrollStart - dx;
+    });
+
+    // Atualiza a bolinha ativa conforme o scroll (mouse ou dedo)
+    if (!dotsWrap) return;
+    const dots = $$(".testi-dot", dotsWrap);
+    const updateActiveDot = () => {
+      const cardWidth = track.firstElementChild.getBoundingClientRect().width + 16; // +gap
+      const index = Math.round(track.scrollLeft / cardWidth);
+      dots.forEach((d, i) => d.classList.toggle("is-active", i === index));
+    };
+    track.addEventListener("scroll", () => {
+      window.requestAnimationFrame(updateActiveDot);
+    }, { passive: true });
   }
 
   /* ---------- Differentials ---------- */
   const DIFFS = [
-    { i: "✦", t: "Atendimento próximo",        d: "Personalizado, do primeiro contato ao último brinde." },
-    { i: "❖", t: "Cuidado obsessivo",          d: "Cada detalhe pensado, planejado e executado." },
-    { i: "✧", t: "Equipe experiente",          d: "Profissionais com bagagem em grandes celebrações." },
-    { i: "❀", t: "Eventos exclusivos",         d: "Nenhum evento é igual ao outro. Como deve ser." },
-    { i: "✦", t: "Compromisso real",           d: "Excelência não é meta — é ponto de partida." },
+    { i: "✦", t: "Atendimento próximo", d: "Personalizado, do primeiro contato ao último brinde." },
+    { i: "❖", t: "Cuidado obsessivo", d: "Cada detalhe pensado, planejado e executado." },
+    { i: "✧", t: "Equipe experiente", d: "Profissionais com bagagem em grandes celebrações." },
+    { i: "❀", t: "Eventos exclusivos", d: "Nenhum evento é igual ao outro. Como deve ser." },
+    { i: "✦", t: "Compromisso real", d: "Excelência não é meta — é ponto de partida." },
     { i: "❖", t: "Experiências que emocionam", d: "O que fica é a memória. E ela precisa ser perfeita." },
   ];
 
@@ -212,12 +256,12 @@
 
   /* ---------- Gallery + Lightbox ---------- */
   const GALLERY = [
-    { src: "images/gallery-1.jpg",   alt: "Primeira dança em salão sofisticado",   aspect: "34" },
-    { src: "images/gallery-2.jpg",   alt: "Mesa corporativa de gala",              aspect: "11" },
-    { src: "images/gallery-4.jpg",   alt: "Cerimônia ao pôr do sol",               aspect: "34" },
-    { src: "images/gallery-3.jpg",   alt: "Bolo de aniversário com folhas de ouro",aspect: "11" },
-    { src: "images/hero-event.jpg",  alt: "Mesa à luz de velas com flores bordô",  aspect: "34" },
-    { src: "images/about-event.jpg", alt: "Brinde de champanhe",                   aspect: "11" },
+    { src: "images/gallery-1.jpg", alt: "Primeira dança em salão sofisticado", aspect: "34" },
+    { src: "images/gallery-2.jpg", alt: "Mesa corporativa de gala", aspect: "11" },
+    { src: "images/gallery-4.jpg", alt: "Cerimônia ao pôr do sol", aspect: "34" },
+    { src: "images/gallery-3.jpg", alt: "Bolo de aniversário com folhas de ouro", aspect: "11" },
+    { src: "images/hero-event.jpg", alt: "Mesa à luz de velas com flores bordô", aspect: "34" },
+    { src: "images/about-event.jpg", alt: "Brinde de champanhe", aspect: "11" },
   ];
 
   function renderGallery() {

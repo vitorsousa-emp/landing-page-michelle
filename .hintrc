@@ -11,6 +11,17 @@
         ]
       }
     ],
-    "disown-opener": "off"
+    "disown-opener": "off",
+    "compat-api/css": [
+      "default",
+      {
+        "ignore": [
+          "user-select",
+          "scrollbar-width",
+          "-webkit-overflow-scrolling",
+          "scrollbar-width: none"
+        ]
+      }
+    ]
   }
 }
