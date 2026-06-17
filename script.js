@@ -268,7 +268,7 @@
   /* ---------- Gallery + Lightbox ---------- */
   /* ---------- Gallery — painel de histórias interativo ---------- */
   const GALLERY = [
-    { src: "images/gallery-1.jpg", title: "A entrada", desc: "O momento em que tudo começa: luzes, música e a primeira emoção da noite." },
+    { src: "images/gallery-1.jpg", title: "A entrada", },
     { src: "images/gallery-2.jpg", title: "A mesa de gala", desc: "Cenário pensado para reunir formandos e família num único brinde." },
     { src: "images/gallery-4.jpg", title: "O pôr do sol", desc: "Fotos que ficam para sempre, no horário em que a luz é mais bonita." },
     { src: "images/gallery-3.jpg", title: "O brinde de ouro", desc: "Champanhe, folhas douradas e o sabor da conquista." },
@@ -290,7 +290,7 @@
         <span class="gallery-panel__hint">+</span>
         <div class="gallery-panel__caption">
           <h3 class="gallery-panel__title">${g.title}</h3>
-          <p class="gallery-panel__desc">${g.desc}</p>
+          
         </div>
       `;
       wrap.appendChild(panel);
@@ -303,33 +303,72 @@
     const panels = $$(".gallery-panel", wrap);
     const isMobile = () => window.matchMedia("(max-width: 767px)").matches;
 
+    const openLightbox = (idx) => {
+      const item = GALLERY[idx];
+      const modal = $("#lightbox");
+      const img = $("#lightbox-img");
+      img.src = item.src;
+      img.alt = item.title;
+      openModal(modal);
+    };
+
     panels.forEach((panel) => {
-      // Desktop: hover abre o painel
+      // Desktop: hover expande o painel
       panel.addEventListener("mouseenter", () => {
         if (isMobile()) return;
         panels.forEach((p) => p.classList.remove("is-active"));
         panel.classList.add("is-active");
       });
 
-      // Mobile + clique geral: abre em lightbox para ver a imagem inteira
+      // Desktop: clique abre lightbox
       panel.addEventListener("click", () => {
-        if (isMobile()) {
-          panels.forEach((p) => p.classList.remove("is-active"));
-          panel.classList.add("is-active");
+        if (!isMobile()) {
+          openLightbox(Number(panel.dataset.index));
           return;
         }
-        const idx = Number(panel.dataset.index);
-        const item = GALLERY[idx];
-        const modal = $("#lightbox");
-        const img = $("#lightbox-img");
-        img.src = item.src;
-        img.alt = item.title;
-        openModal(modal);
+        // Mobile: primeiro toque expande, segundo toque abre lightbox
+        if (panel.classList.contains("is-active")) {
+          openLightbox(Number(panel.dataset.index));
+        } else {
+          panels.forEach((p) => p.classList.remove("is-active"));
+          panel.classList.add("is-active");
+          panel.scrollIntoView({ behavior: "smooth", block: "nearest", inline: "center" });
+        }
       });
     });
 
-    // estado inicial: primeiro painel ativo ao carregar (desktop)
-    if (!isMobile()) panels[0]?.classList.add("is-active");
+    // estado inicial: primeiro painel ativo
+    panels[0]?.classList.add("is-active");
+
+    // dots de navegação no mobile
+    if (isMobile()) buildGalleryDots(wrap, panels);
+
+    // atualiza dot ativo ao arrastar
+    wrap.addEventListener("scroll", () => {
+      if (!isMobile()) return;
+      const panelW = panels[0]?.offsetWidth + 8 || 1;
+      const idx = Math.round(wrap.scrollLeft / panelW);
+      panels.forEach((p, i) => p.classList.toggle("is-active", i === idx));
+      $$(".gallery-dot").forEach((d, i) => d.classList.toggle("is-active", i === idx));
+    }, { passive: true });
+  }
+
+  function buildGalleryDots(wrap, panels) {
+    const existing = $("#gallery-dots");
+    if (existing) existing.remove();
+    const dots = document.createElement("div");
+    dots.id = "gallery-dots";
+    dots.className = "gallery-dots";
+    panels.forEach((_, i) => {
+      const d = document.createElement("span");
+      d.className = "gallery-dot" + (i === 0 ? " is-active" : "");
+      d.addEventListener("click", () => {
+        const panelW = panels[0]?.offsetWidth + 8 || 0;
+        wrap.scrollTo({ left: i * panelW, behavior: "smooth" });
+      });
+      dots.appendChild(d);
+    });
+    wrap.parentElement.appendChild(dots);
   }
 
   function bindLightbox() {
