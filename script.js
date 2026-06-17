@@ -266,49 +266,78 @@
   }
 
   /* ---------- Gallery + Lightbox ---------- */
+  /* ---------- Gallery — painel de histórias interativo ---------- */
   const GALLERY = [
-    { src: "images/gallery-1.jpg", alt: "Primeira dança em salão sofisticado", aspect: "34" },
-    { src: "images/gallery-2.jpg", alt: "Mesa corporativa de gala", aspect: "11" },
-    { src: "images/gallery-4.jpg", alt: "Cerimônia ao pôr do sol", aspect: "34" },
-    { src: "images/gallery-3.jpg", alt: "Bolo de aniversário com folhas de ouro", aspect: "11" },
-    { src: "images/hero-event.jpg", alt: "Mesa à luz de velas com flores bordô", aspect: "34" },
-    { src: "images/about-event.jpg", alt: "Brinde de champanhe", aspect: "11" },
+    { src: "images/gallery-1.jpg", title: "A entrada", desc: "O momento em que tudo começa: luzes, música e a primeira emoção da noite." },
+    { src: "images/gallery-2.jpg", title: "A mesa de gala", desc: "Cenário pensado para reunir formandos e família num único brinde." },
+    { src: "images/gallery-4.jpg", title: "O pôr do sol", desc: "Fotos que ficam para sempre, no horário em que a luz é mais bonita." },
+    { src: "images/gallery-3.jpg", title: "O brinde de ouro", desc: "Champanhe, folhas douradas e o sabor da conquista." },
+    { src: "images/hero-event.jpg", title: "A noite", desc: "Velas, flores bordô e a atmosfera que transforma uma festa em memória." },
+    { src: "images/about-event.jpg", title: "O encontro", desc: "Pessoas que se conhecem ou não, unidas por uma mesma celebração." },
   ];
 
   function renderGallery() {
-    const grid = $("#gallery");
-    if (!grid) return;
+    const wrap = $("#gallery");
+    if (!wrap) return;
+
     GALLERY.forEach((g, i) => {
-      const wrap = document.createElement("div");
-      wrap.className = "reveal";
-      wrap.dataset.delay = String(i * 60);
-      wrap.innerHTML = `
-        <button type="button" class="gallery__item gallery__item--${g.aspect}" data-index="${i}">
-          <img src="${g.src}" alt="${g.alt}" loading="lazy" />
-        </button>
+      const panel = document.createElement("div");
+      panel.className = "gallery-panel" + (i === 0 ? " is-active" : "");
+      panel.dataset.index = String(i);
+      panel.innerHTML = `
+        <img src="${g.src}" alt="${g.title}" loading="lazy" class="gallery-panel__img" />
+        <span class="gallery-panel__num">0${i + 1}</span>
+        <span class="gallery-panel__hint">+</span>
+        <div class="gallery-panel__caption">
+          <h3 class="gallery-panel__title">${g.title}</h3>
+          <p class="gallery-panel__desc">${g.desc}</p>
+        </div>
       `;
-      grid.appendChild(wrap);
+      wrap.appendChild(panel);
     });
+
+    bindGalleryPanels(wrap);
+  }
+
+  function bindGalleryPanels(wrap) {
+    const panels = $$(".gallery-panel", wrap);
+    const isMobile = () => window.matchMedia("(max-width: 767px)").matches;
+
+    panels.forEach((panel) => {
+      // Desktop: hover abre o painel
+      panel.addEventListener("mouseenter", () => {
+        if (isMobile()) return;
+        panels.forEach((p) => p.classList.remove("is-active"));
+        panel.classList.add("is-active");
+      });
+
+      // Mobile + clique geral: abre em lightbox para ver a imagem inteira
+      panel.addEventListener("click", () => {
+        if (isMobile()) {
+          panels.forEach((p) => p.classList.remove("is-active"));
+          panel.classList.add("is-active");
+          return;
+        }
+        const idx = Number(panel.dataset.index);
+        const item = GALLERY[idx];
+        const modal = $("#lightbox");
+        const img = $("#lightbox-img");
+        img.src = item.src;
+        img.alt = item.title;
+        openModal(modal);
+      });
+    });
+
+    // estado inicial: primeiro painel ativo ao carregar (desktop)
+    if (!isMobile()) panels[0]?.classList.add("is-active");
   }
 
   function bindLightbox() {
     const modal = $("#lightbox");
-    const img = $("#lightbox-img");
-    document.addEventListener("click", (e) => {
-      const btn = e.target.closest(".gallery__item");
-      if (!btn) return;
-      const idx = Number(btn.dataset.index);
-      const item = GALLERY[idx];
-      if (!item) return;
-      img.src = item.src;
-      img.alt = item.alt;
-      openModal(modal);
-    });
     modal.addEventListener("click", (e) => {
       if (e.target === modal || e.target.dataset.close !== undefined) closeModal(modal);
     });
   }
-
   /* ---------- Video modal ---------- */
   function bindVideoModal() {
     const modal = $("#video-modal");

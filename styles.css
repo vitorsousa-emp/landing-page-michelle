@@ -668,10 +668,13 @@ h4 {
   position: relative;
   padding-block: 6rem;
 }
+
 .section--about::before {
   content: "";
   position: absolute;
-  top: 0; left: 0; right: 0;
+  top: 0;
+  left: 0;
+  right: 0;
   height: 120px;
   background: linear-gradient(to bottom, var(--bg), transparent);
   pointer-events: none;
@@ -834,7 +837,7 @@ h4 {
   gap: 1rem;
 }
 
-.service-card__head > div {
+.service-card__head>div {
   display: flex;
   align-items: center;
   gap: 0.75rem;
@@ -847,7 +850,8 @@ h4 {
 }
 
 .service-card__title {
-  font-size: 2rem; /* ajusta conforme quiser */
+  font-size: 2rem;
+  /* ajusta conforme quiser */
   line-height: 1.3;
   flex: 1;
   min-width: 0;
@@ -996,19 +1000,23 @@ h4 {
 .section--testimonials {
   position: relative;
 }
+
 .section--testimonials::before,
 .section--testimonials::after {
   content: "";
   position: absolute;
-  left: 0; right: 0;
+  left: 0;
+  right: 0;
   height: 120px;
   pointer-events: none;
   z-index: 2;
 }
+
 .section--testimonials::before {
   top: 0;
   background: linear-gradient(to bottom, var(--bg), transparent);
 }
+
 .section--testimonials::after {
   bottom: 0;
   background: linear-gradient(to top, var(--bg), transparent);
@@ -1162,20 +1170,27 @@ h4 {
   cursor: pointer;
 }
 
-.diff:first-child { border-top: 1px solid rgba(212, 175, 55, .15); }
+.diff:first-child {
+  border-top: 1px solid rgba(212, 175, 55, .15);
+}
 
 /* linha dourada que cresce ao abrir */
 .diff::before {
   content: "";
   position: absolute;
-  left: 0; top: 0; bottom: 0;
+  left: 0;
+  top: 0;
+  bottom: 0;
   width: 2px;
   background: var(--gold);
   transform: scaleY(0);
   transform-origin: top;
   transition: transform .5s cubic-bezier(.2, .7, .2, 1);
 }
-.diff.is-open::before { transform: scaleY(1); }
+
+.diff.is-open::before {
+  transform: scaleY(1);
+}
 
 .diff__head {
   display: flex;
@@ -1184,7 +1199,10 @@ h4 {
   padding: 1.5rem 1.25rem;
   transition: padding .4s;
 }
-.diff.is-open .diff__head { padding-left: 1.75rem; }
+
+.diff.is-open .diff__head {
+  padding-left: 1.75rem;
+}
 
 .diff__num {
   font-family: var(--font-display);
@@ -1195,7 +1213,10 @@ h4 {
   line-height: 1;
   transition: color .4s;
 }
-.diff.is-open .diff__num { color: var(--gold); }
+
+.diff.is-open .diff__num {
+  color: var(--gold);
+}
 
 .diff__title {
   flex: 1;
@@ -1204,18 +1225,24 @@ h4 {
   color: var(--cream);
   transition: color .4s;
 }
-.diff.is-open .diff__title { color: #fff; }
+
+.diff.is-open .diff__title {
+  color: #fff;
+}
 
 .diff__arrow {
-  width: 28px; height: 28px;
+  width: 28px;
+  height: 28px;
   border-radius: 50%;
   border: 1px solid rgba(212, 175, 55, .3);
-  display: grid; place-items: center;
+  display: grid;
+  place-items: center;
   font-size: 0.75rem;
   color: var(--gold);
   transition: transform .4s, border-color .4s;
   flex-shrink: 0;
 }
+
 .diff.is-open .diff__arrow {
   transform: rotate(45deg);
   border-color: var(--gold);
@@ -1226,13 +1253,19 @@ h4 {
   grid-template-rows: 0fr;
   transition: grid-template-rows .45s cubic-bezier(.2, .7, .2, 1);
 }
-.diff.is-open .diff__body { grid-template-rows: 1fr; }
+
+.diff.is-open .diff__body {
+  grid-template-rows: 1fr;
+}
 
 .diff__body-inner {
   overflow: hidden;
   padding: 0 1.25rem 0 5rem;
 }
-.diff.is-open .diff__body-inner { padding-bottom: 1.5rem; }
+
+.diff.is-open .diff__body-inner {
+  padding-bottom: 1.5rem;
+}
 
 .diff__desc {
   font-size: 0.9rem;
@@ -1241,108 +1274,191 @@ h4 {
 }
 
 @media (min-width: 640px) {
-  .diff__head { padding: 1.75rem 1.5rem; }
-  .diff__num { font-size: 2.5rem; min-width: 3rem; }
-  .diff__title { font-size: 1.35rem; }
+  .diff__head {
+    padding: 1.75rem 1.5rem;
+  }
+
+  .diff__num {
+    font-size: 2.5rem;
+    min-width: 3rem;
+  }
+
+  .diff__title {
+    font-size: 1.35rem;
+  }
 }
 
 /* =================== GALLERY =================== */
-.section--gallery {
-  position: relative;
-}
-.section--gallery::before,
-.section--gallery::after {
-  content: "";
-  position: absolute;
-  left: 0; right: 0;
-  height: 140px;
-  pointer-events: none;
-  z-index: 2;
-}
-.section--gallery::before {
-  top: 0;
-  background: linear-gradient(to bottom, var(--bg), transparent);
-}
-.section--gallery::after {
-  bottom: 0;
-  background: linear-gradient(to top, var(--bg), transparent);
-}
-
-@media (min-width: 640px) {
-  .section--gallery {
-    padding-inline: 1.5rem;
-  }
-}
-
-.gallery {
-  margin-top: 3rem;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
+/* =================== GALLERY — PAINEL DE HISTÓRIAS =================== */
+.gallery-panels {
+  margin-top: 3.5rem;
+  display: flex;
   gap: 0.5rem;
+  height: 70vh;
+  max-height: 620px;
 }
 
-@media (min-width: 640px) {
-  .gallery {
-    grid-template-columns: 1fr 1fr 1fr;
-    gap: 0.75rem;
-  }
-}
-
-.gallery__item {
+.gallery-panel {
   position: relative;
-  width: 100%;
+  flex: 1;
+  min-width: 0;
+  height: 100%;
   overflow: hidden;
-  border-radius: 2px;
+  border-radius: 4px;
   border: 1px solid rgba(212, 175, 55, .15);
   cursor: pointer;
+  transition: flex 0.7s cubic-bezier(.22, 1, .36, 1);
 }
 
-.gallery__item img {
+/* painel ativo (aberto) ocupa mais espaço */
+.gallery-panel.is-active {
+  flex: 4;
+}
+
+.gallery-panel__img {
+  position: absolute;
+  inset: 0;
   width: 100%;
   height: 100%;
   object-fit: cover;
-  transition: transform 1.4s ease;
+  filter: saturate(.85) brightness(.78);
+  transition: filter 0.7s ease, transform 1.8s ease;
 }
 
-.gallery__item:hover img {
-  transform: scale(1.1);
+.gallery-panel.is-active .gallery-panel__img {
+  filter: saturate(1) brightness(.92);
+  transform: scale(1.04);
 }
 
-.gallery__item::before {
+/* overlay escurecendo de baixo para cima — sempre presente para leitura do texto */
+.gallery-panel::before {
   content: "";
   position: absolute;
   inset: 0;
-  background: linear-gradient(to top, rgba(13, 13, 13, .8), transparent, transparent);
-  opacity: .6;
-  transition: opacity .5s;
+  background: linear-gradient(to top, rgba(13, 13, 13, .92) 0%, rgba(13, 13, 13, .25) 55%, rgba(13, 13, 13, .55) 100%);
   z-index: 1;
+  transition: opacity .6s;
 }
 
-.gallery__item:hover::before {
-  opacity: .3;
-}
-
-.gallery__item::after {
-  content: "";
+/* número de capítulo — vertical quando fechado */
+.gallery-panel__num {
   position: absolute;
-  inset: 8px;
-  border-radius: 2px;
-  box-shadow: inset 0 0 0 1px rgba(212, 175, 55, 0);
-  transition: box-shadow .5s;
-  pointer-events: none;
+  left: 0.9rem;
+  top: 1.1rem;
   z-index: 2;
+  font-family: var(--font-display);
+  font-size: 0.95rem;
+  letter-spacing: 0.1em;
+  color: var(--gold-soft);
+  opacity: .85;
 }
 
-.gallery__item:hover::after {
-  box-shadow: inset 0 0 0 1px rgba(212, 175, 55, .5);
+/* legenda — texto vertical (rotado) quando fechado, horizontal quando aberto */
+.gallery-panel__caption {
+  position: absolute;
+  left: 0.9rem;
+  bottom: 1.1rem;
+  z-index: 2;
+  max-width: calc(100% - 1.8rem);
 }
 
-.gallery__item--34 {
-  aspect-ratio: 3 / 4;
+.gallery-panel__title {
+  font-family: var(--font-display);
+  font-size: 1.05rem;
+  color: var(--cream);
+  white-space: nowrap;
+  writing-mode: vertical-rl;
+  text-orientation: mixed;
+  transition: writing-mode .01s, font-size .5s;
 }
 
-.gallery__item--11 {
-  aspect-ratio: 1 / 1;
+.gallery-panel__desc {
+  display: none;
+  margin-top: 0.5rem;
+  font-size: 0.8rem;
+  line-height: 1.6;
+  color: rgba(247, 245, 242, .75);
+  max-width: 26rem;
+}
+
+/* ESTADO ABERTO — texto vira horizontal e descrição aparece */
+.gallery-panel.is-active .gallery-panel__title {
+  writing-mode: horizontal-tb;
+  font-size: 1.4rem;
+}
+
+.gallery-panel.is-active .gallery-panel__desc {
+  display: block;
+  animation: fade-up .6s ease both;
+}
+
+/* ícone de "+" / lupa no canto, só aparece fechado, sugere interatividade */
+.gallery-panel__hint {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  z-index: 2;
+  width: 28px;
+  height: 28px;
+  border-radius: 999px;
+  border: 1px solid rgba(212, 175, 55, .5);
+  display: grid;
+  place-items: center;
+  font-size: 0.9rem;
+  color: var(--gold);
+  opacity: .85;
+  transition: opacity .3s, transform .3s;
+}
+
+.gallery-panel.is-active .gallery-panel__hint {
+  opacity: 0;
+  transform: scale(.6);
+}
+
+/* =================== MOBILE: vira carrossel de tela cheia =================== */
+@media (max-width: 767px) {
+  .gallery-panels {
+    height: auto;
+    max-height: none;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    padding-bottom: 0.5rem;
+    scrollbar-width: none;
+  }
+
+  .gallery-panels::-webkit-scrollbar {
+    display: none;
+  }
+
+  .gallery-panel {
+    flex: 0 0 78%;
+    height: 420px;
+    scroll-snap-align: center;
+  }
+
+  /* no mobile não há "hover" — todo card já mostra a legenda horizontal */
+  .gallery-panel .gallery-panel__title {
+    writing-mode: horizontal-tb;
+    font-size: 1.15rem;
+    white-space: normal;
+  }
+
+  .gallery-panel .gallery-panel__desc {
+    display: block;
+  }
+
+  .gallery-panel .gallery-panel__hint {
+    display: none;
+  }
+
+  .gallery-panel.is-active {
+    flex: 0 0 78%;
+  }
+
+  .gallery-panel.is-active .gallery-panel__img {
+    transform: scale(1.04);
+  }
 }
 
 /* =================== FINAL CTA =================== */
@@ -1351,19 +1467,23 @@ h4 {
   overflow: hidden;
   padding: 7rem 1.5rem;
 }
+
 .final-cta::before,
 .final-cta::after {
   content: "";
   position: absolute;
-  left: 0; right: 0;
+  left: 0;
+  right: 0;
   height: 160px;
   pointer-events: none;
   z-index: 3;
 }
+
 .final-cta::before {
   top: 0;
   background: linear-gradient(to bottom, var(--bg), transparent);
 }
+
 .final-cta::after {
   bottom: 0;
   background: linear-gradient(to top, var(--bg), transparent);
@@ -1390,11 +1510,11 @@ h4 {
   position: absolute;
   inset: 0;
   background: linear-gradient(to bottom,
-    var(--bg) 0%,
-    rgba(13, 13, 13, .85) 18%,
-    rgba(13, 13, 13, .70) 50%,
-    rgba(13, 13, 13, .88) 82%,
-    var(--bg) 100%);
+      var(--bg) 0%,
+      rgba(13, 13, 13, .85) 18%,
+      rgba(13, 13, 13, .70) 50%,
+      rgba(13, 13, 13, .88) 82%,
+      var(--bg) 100%);
 }
 
 .final-cta__overlay-2 {
@@ -1429,14 +1549,16 @@ h4 {
   background: var(--bg);
   padding: 4rem 1.5rem 7rem;
 }
+
 .footer::before {
   content: "";
   position: absolute;
-  top: 0; left: 50%;
+  top: 0;
+  left: 50%;
   transform: translateX(-50%);
   width: min(160px, 60%);
   height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(212,175,55,.35), transparent);
+  background: linear-gradient(90deg, transparent, rgba(212, 175, 55, .35), transparent);
 }
 
 @media (min-width: 640px) {
