@@ -665,7 +665,17 @@ h4 {
 
 /* =================== ABOUT =================== */
 .section--about {
+  position: relative;
   padding-block: 6rem;
+}
+.section--about::before {
+  content: "";
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 120px;
+  background: linear-gradient(to bottom, var(--bg), transparent);
+  pointer-events: none;
+  z-index: 2;
 }
 
 @media (min-width: 640px) {
@@ -1341,6 +1351,23 @@ h4 {
   overflow: hidden;
   padding: 7rem 1.5rem;
 }
+.final-cta::before,
+.final-cta::after {
+  content: "";
+  position: absolute;
+  left: 0; right: 0;
+  height: 160px;
+  pointer-events: none;
+  z-index: 3;
+}
+.final-cta::before {
+  top: 0;
+  background: linear-gradient(to bottom, var(--bg), transparent);
+}
+.final-cta::after {
+  bottom: 0;
+  background: linear-gradient(to top, var(--bg), transparent);
+}
 
 @media (min-width: 640px) {
   .final-cta {
@@ -1362,7 +1389,12 @@ h4 {
 .final-cta__overlay-1 {
   position: absolute;
   inset: 0;
-  background: linear-gradient(to bottom, var(--bg), rgba(13, 13, 13, .85), var(--bg));
+  background: linear-gradient(to bottom,
+    var(--bg) 0%,
+    rgba(13, 13, 13, .85) 18%,
+    rgba(13, 13, 13, .70) 50%,
+    rgba(13, 13, 13, .88) 82%,
+    var(--bg) 100%);
 }
 
 .final-cta__overlay-2 {
@@ -1373,6 +1405,7 @@ h4 {
 
 .final-cta__content {
   position: relative;
+  z-index: 4;
   max-width: 48rem;
   margin-inline: auto;
   text-align: center;
