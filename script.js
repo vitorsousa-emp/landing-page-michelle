@@ -105,12 +105,12 @@
 
   /* ---------- Services (expansíveis) ---------- */
   const SERVICES = [
-    { icon: "🪩", title: "Bandas", desc: "Animação não vai faltar e toda estrutura de palco e luz está incluída." },
-    { icon: "🍹", title: "Coqueteís ilimitados", desc: "Bar temático com drinks durante todo o evento" },
-    { icon: "🎊", title: "Decoração", desc: "Vamos criar um ambiente com muitos cenários para registrar esse dia mágico." },
-    { icon: "🎁", title: "Brindes", desc: "1. Foto do formando no painel da entrada do buffet 2. Brinde de champanhe para momento do Cerimonial 3. Prismas de identificação para sua mesa 4. Descontos especiais com nossos parceiros em aluguel de vestidos, ternos, smokings, anel, maquiagem etc." },
-    { icon: "📸", title: "Cobertura fotografica", desc: "Registre cada momento do seu evento com um fotografo proficional" },
-    { icon: "🍛", title: "buffet", desc: "Uma festa também tem que agradar o paladar dos convidados." },
+    { img: "images/img1.jpg", title: "Banda ao vivo", desc: "Do primeiro ao último acorde, a energia da noite é garantida. Estrutura completa de palco, iluminação e som profissional inclusos." },
+    { img: "images/img1.jpg", title: "Drinks ilimitados", desc: "Bar temático com drinques, drinks sem álcool e bebidas durante toda a noite. Sem limite, sem preocupação." },
+    { img: "images/img1.jpg", title: "Decoração exclusiva", desc: "Cenários elaborados para cada momento da noite: entrada, mesa dos formandos, área de fotos e muito mais." },
+    { img: "images/img1.jpg", title: "Brindes inclusos", desc: "Foto do formando no painel de entrada · Brinde de champanhe no cerimonial · Prisma de identificação na mesa · Descontos com parceiros (vestido, terno, maquiagem e muito mais)." },
+    { img: "images/img1.jpg", title: "Cobertura fotográfica", desc: "Cada abraço, cada lágrima, cada sorriso registrado por fotógrafo profissional. Memórias que você vai querer guardar para sempre." },
+    { img: "images/img1.jpg", title: "Buffet completo", desc: "Uma noite inesquecível também passa pelo paladar. Cardápio sofisticado pensado para agradar todos os seus convidados." },
   ];
 
   function renderServices() {
@@ -121,25 +121,24 @@
       wrap.className = "reveal";
       wrap.dataset.delay = String(i * 80);
       wrap.innerHTML = `
-        <button type="button" class="service-card">
-          <div class="service-card__head">
-            <div>
-              <div class="service-card__icon">${s.icon}</div>
-              <h3 class="service-card__title">${s.title}</h3>
-            </div>
-            <span class="service-card__toggle" aria-hidden="true">+</span>
+      <button type="button" class="service-card">
+        <div class="service-card__head">
+          <div>
+            <img src="${s.img}" alt="${s.title}" class="service-card__img" />
+            <h3 class="service-card__title"><span class="italic text-shimmer2"> ${s.title}</span></h3>
           </div>
-          <div class="service-card__body">
-            <div class="service-card__body-inner">
-              <div class="service-card__sep"></div>
-              <p class="service-card__desc">${s.desc}</p>
-            </div>
+          <span class="service-card__toggle" aria-hidden="true">+</span>
+        </div>
+        <div class="service-card__body">
+          <div class="service-card__body-inner">
+            <div class="service-card__sep"></div>
+            <p class="service-card__desc">${s.desc}</p>
           </div>
-        </button>
-      `;
+        </div>
+      </button>
+    `;
       const card = wrap.querySelector(".service-card");
       card.addEventListener("click", () => {
-        // toggle apenas o card clicado (mesma UX do React: um aberto por vez)
         $$(".service-card.is-open").forEach((c) => c !== card && c.classList.remove("is-open"));
         card.classList.toggle("is-open");
       });
@@ -150,10 +149,12 @@
   /* ---------- Testimonials (mensagens WhatsApp-like) ---------- */
   /* ---------- Testimonials (cards arrastáveis) ---------- */
   const MESSAGES = [
-    { name: "Mariana C.",     time: "casamento",        stars: 5, text: "A WS superou todas as nossas expectativas. Foi simplesmente perfeito." },
-    { name: "Rafael & Júlia", time: "cerimônia",         stars: 5, text: "A tranquilidade de saber que tudo estava sob controle não tem preço." },
-    { name: "Camila F.",      time: "aniversário",       stars: 5, text: "Faria tudo novamente com eles. Cada detalhe foi pensado com carinho." },
-    { name: "Diretoria Vitra",time: "evento corporativo",stars: 5, text: "Profissionalismo absoluto. Nossos convidados ainda comentam o evento." },
+    { name: "Isabela R.", time: "Formanda em Direito", stars: 5, text: "Minha turma não quis fazer formatura. Decidi não abrir mão da minha noite. Foi a melhor decisão que tomei." },
+    { name: "Lucas & família", time: "Formando em Engenharia", stars: 5, text: "A estrutura foi impecável. Meus pais ainda comentam o quanto a noite foi especial. Valeu cada detalhe." },
+    { name: "Camila F.", time: "Formanda em Medicina", stars: 5, text: "Achei que sem a turma não seria a mesma coisa. Me enganei completamente. Foi a minha noite, do jeito que eu sempre quis." },
+    { name: "Thiago M.", time: "Formando em Administração", stars: 5, text: "Organização, emoção e profissionalismo do começo ao fim. Não precisei me preocupar com nada. Só aproveitei." },
+    { name: "Ana Paula S.", time: "Formanda em Psicologia", stars: 5, text: "Você não precisa esperar a turma decidir. Eu não esperei e vivi a formatura que merecia." },
+    { name: "Rafael & Júlia", time: "Formandos em Arquitetura", stars: 5, text: "Uma noite completa, sofisticada e emocionante. A WS entregou muito além do que esperávamos." },
   ];
 
   function renderMessages() {
@@ -189,7 +190,7 @@
   }
 
   /* ---------- Drag-to-scroll (mouse) + swipe nativo (touch) ---------- */
-  
+
   function bindDraggableTrack(track, dotsWrap) {
     let isDown = false;
     let startX = 0;
@@ -228,29 +229,39 @@
 
   /* ---------- Differentials ---------- */
   const DIFFS = [
-    { i: "✦", t: "Atendimento próximo", d: "Personalizado, do primeiro contato ao último brinde." },
-    { i: "❖", t: "Cuidado obsessivo", d: "Cada detalhe pensado, planejado e executado." },
-    { i: "✧", t: "Equipe experiente", d: "Profissionais com bagagem em grandes celebrações." },
-    { i: "❀", t: "Eventos exclusivos", d: "Nenhum evento é igual ao outro. Como deve ser." },
-    { i: "✦", t: "Compromisso real", d: "Excelência não é meta — é ponto de partida." },
-    { i: "❖", t: "Experiências que emocionam", d: "O que fica é a memória. E ela precisa ser perfeita." },
+    { i: "✦", t: "Adesão individual, experiência completa", d: "Você se inscreve sozinho e vive uma noite completa com estrutura de formatura de verdade." },
+    { i: "❖", t: "Sem dependência de turma", d: "Não precisa convencer ninguém. Sua decisão é sua. Sua celebração também." },
+    { i: "✧", t: "Família e amigos bem-vindos", d: "Leve quem você quer ao seu lado nessa noite. O evento é seu e a memória é de todos." },
+    { i: "❀", t: "Segurança e planejamento garantidos", d: "Mais de 22.000 eventos realizados. Você está em mãos experientes, do primeiro contato ao último brinde." },
+    { i: "✦", t: "Tudo incluso, sem surpresas", d: "Banda, buffet, open bar, decoração, foto e brindes. Uma única adesão, uma noite completa." },
+    { i: "❖", t: "Uma noite feita para você", d: "Do primeiro brinde à última música, cada detalhe é pensado para que você viva a formatura que merece." },
   ];
 
   function renderDiffs() {
     const grid = $("#diffs");
     if (!grid) return;
     DIFFS.forEach((d, i) => {
-      const wrap = document.createElement("div");
-      wrap.className = "reveal";
-      wrap.dataset.delay = String(i * 60);
-      wrap.innerHTML = `
-        <div class="diff">
-          <div class="diff__icon">${d.i}</div>
-          <h3 class="diff__title">${d.t}</h3>
+      const item = document.createElement("div");
+      item.className = "diff reveal";
+      item.dataset.delay = String(i * 60);
+      item.innerHTML = `
+      <div class="diff__head">
+        <div class="diff__num">0${i + 1}</div>
+        <h3 class="diff__title">${d.t}</h3>
+        <div class="diff__arrow">+</div>
+      </div>
+      <div class="diff__body">
+        <div class="diff__body-inner">
           <p class="diff__desc">${d.d}</p>
         </div>
-      `;
-      grid.appendChild(wrap);
+      </div>
+    `;
+      item.addEventListener("click", () => {
+        const isOpen = item.classList.contains("is-open");
+        $$(".diff.is-open").forEach(el => el.classList.remove("is-open"));
+        if (!isOpen) item.classList.add("is-open");
+      });
+      grid.appendChild(item);
     });
   }
 
