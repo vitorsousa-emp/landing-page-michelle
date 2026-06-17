@@ -703,7 +703,7 @@ h4 {
 .about__img-wrap {
   position: relative;
   overflow: hidden;
-  border-radius: 2px;
+  border-radius: 5px;
 }
 
 .about__img {
