@@ -15,21 +15,25 @@
 
   document.addEventListener("DOMContentLoaded", init);
 
-  function init() {
-    setYear();
-    hideLoadingScreen();
-    bindNavScroll();
-    renderGallery();        // ← movido para o início, prioridade no carregamento
-    spawnParticles();
-    renderServices();
+function init() {
+  setYear();
+  hideLoadingScreen();
+  bindNavScroll();
+  spawnParticles();
+  renderServices();
+  bindRevealOnScroll();
+  bindVideoModal();
+  bindLightbox();
+  bindFloatingCTA();
+  bindModalEscape();
+
+  // adia o que está abaixo do fold
+  setTimeout(() => {
+    renderGallery();
     renderMessages();
     renderDiffs();
-    bindRevealOnScroll();
-    bindVideoModal();
-    bindLightbox();
-    bindFloatingCTA();
-    bindModalEscape();
-  }
+  }, 600);
+}
 
   /* ---------- Footer year ---------- */
   function setYear() {

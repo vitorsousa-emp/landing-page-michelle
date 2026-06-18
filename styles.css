@@ -202,15 +202,11 @@ h4 {
 
 /* Scroll-reveal */
 .reveal {
-  opacity: 0;
-  transform: translateY(20px);
-  transition: opacity 0.55s cubic-bezier(.2, .7, .2, 1),
-    transform 0.55s cubic-bezier(.2, .7, .2, 1);
+ will-change: opacity, transform;
 }
 
 .reveal.is-in {
-  opacity: 1;
-  transform: translateY(0);
+  will-change: auto;
 }
 
 /* =================== BUTTONS =================== */
@@ -425,6 +421,14 @@ h4 {
     -webkit-backdrop-filter: none;
     backdrop-filter: none;
     background-color: rgba(13, 13, 13, 0.95);
+
+    .text-shimmer,
+    .text-shimmer2 {
+      animation: none;
+      background: none;
+      color: var(--gold);
+    }
+
     /* compensa com opacidade maior */
   }
 }
@@ -906,9 +910,7 @@ h4 {
 }
 
 .service-card__body {
-  overflow: hidden;
-  max-height: 0;
-  transition: max-height .4s cubic-bezier(.2, .7, .2, 1);
+  will-change: max-height;
 }
 
 .service-card.is-open .service-card__body {
