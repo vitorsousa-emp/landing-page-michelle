@@ -18,8 +18,8 @@
   --muted: #222;
   --border: rgba(212, 175, 55, 0.25);
 
-  --font-display: "Cormorant Garamond", "Times New Roman", serif;
-  --font-sans: "Inter", system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+  --font-display: "Montserrat", sans-serif;
+  --font-sans: "Montserrat", sans-serif;
   --font-script: "Allura", cursive;
 }
 
@@ -126,7 +126,8 @@ h4 {
 
 .h2 {
   text-align: center;
-  font-size: 1.875rem;
+  font-size: clamp(1.75rem, 7vw, 1.875rem);
+  font-weight: 700;
   max-width: 48rem;
   margin-inline: auto;
 }
@@ -138,7 +139,8 @@ h4 {
 }
 
 .h2--xl {
-  font-size: 2.25rem;
+  font-size: clamp(1.9rem, 7.5vw, 2.25rem);
+  font-weight: 700;
 }
 
 @media (min-width: 640px) {
@@ -201,9 +203,9 @@ h4 {
 /* Scroll-reveal */
 .reveal {
   opacity: 0;
-  transform: translateY(28px);
-  transition: opacity 1.1s cubic-bezier(.2, .7, .2, 1),
-    transform 1.1s cubic-bezier(.2, .7, .2, 1);
+  transform: translateY(20px);
+  transition: opacity 0.55s cubic-bezier(.2, .7, .2, 1),
+    transform 0.55s cubic-bezier(.2, .7, .2, 1);
 }
 
 .reveal.is-in {
@@ -568,8 +570,10 @@ h4 {
 
 .hero__title {
   max-width: 48rem;
-  font-size: 1.875rem;
-  line-height: 1.15;
+  font-size: clamp(2.2rem, 9vw, 3.75rem);
+  font-weight: 800;
+  letter-spacing: -0.01em;
+  line-height: 1.1;
   animation: fade-up 1.2s 1s ease-out both;
 }
 
@@ -583,10 +587,12 @@ h4 {
 
 @media (max-width: 639px) {
   .hero__title {
-    font-size: clamp(1.6rem, 6vw, 2.2rem);
+    font-size: clamp(2.4rem, 10vw, 3rem);
+    font-weight: 800;
   }
   .hero__title .italic {
-    font-size: clamp(1.8rem, 7vw, 2.5rem);
+    font-size: clamp(2.6rem, 11vw, 3.2rem);
+    font-weight: 800;
   }
 }
 
@@ -605,9 +611,10 @@ h4 {
 .hero__sub {
   margin-top: 1.5rem;
   max-width: 28rem;
-  font-size: 0.875rem;
+  font-size: clamp(1.05rem, 4.5vw, 1rem);
+  font-weight: 500;
   line-height: 1.6;
-  color: rgba(247, 245, 242, .7);
+  color: rgba(247, 245, 242, .92);
   animation: fade-up 1.2s 1.3s ease-out both;
 }
 

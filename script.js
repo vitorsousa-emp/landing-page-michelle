@@ -19,11 +19,11 @@
     setYear();
     hideLoadingScreen();
     bindNavScroll();
+    renderGallery();        // ← movido para o início, prioridade no carregamento
     spawnParticles();
     renderServices();
     renderMessages();
     renderDiffs();
-    renderGallery();
     bindRevealOnScroll();
     bindVideoModal();
     bindLightbox();
@@ -283,7 +283,8 @@
       panel.className = "gallery-panel" + (i === 0 ? " is-active" : "");
       panel.dataset.index = String(i);
       panel.innerHTML = `
-        <img src="${g.src}" alt="${g.title}" loading="lazy" class="gallery-panel__img" />
+        <img src="${g.src}" alt="${g.title}" class="gallery-panel__img" loading="${i < 2 ? 'eager' : 'lazy'}" 
+        fetchpriority="${i < 2 ? 'high' : 'auto'}" decoding="async" />
         <span class="gallery-panel__num">0${i + 1}</span>
         <span class="gallery-panel__hint">+</span>
         <div class="gallery-panel__caption">
