@@ -350,12 +350,15 @@
     if (isMobile()) buildGalleryDots(wrap, panels);
 
     // atualiza dot ativo ao arrastar
-    let cachedPanelW = (panels[0]?.offsetWidth || 0) + 8;
-
     wrap.addEventListener("scroll", () => {
       if (!isMobile()) return;
-      const idx = Math.round(wrap.scrollLeft / cachedPanelW);
-      // ...resto igual
+      const panelW = panels[0]?.getBoundingClientRect().width + 8 || 1;
+      const idx = Math.min(
+        Math.round(wrap.scrollLeft / panelW),
+        panels.length - 1
+      );
+      panels.forEach((p, i) => p.classList.toggle("is-active", i === idx));
+      $$(".gallery-dot").forEach((d, i) => d.classList.toggle("is-active", i === idx));
     }, { passive: true });
   }
 
