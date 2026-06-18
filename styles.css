@@ -847,7 +847,7 @@ h4 {
   background: rgba(26, 26, 26, .6);
   padding: 1.75rem;
   text-align: left;
-  transition: all .5s;
+  transition: border-color .3s, background .3s;
   cursor: pointer;
 }
 
@@ -857,7 +857,7 @@ h4 {
 }
 
 .service-card.is-open {
-  box-shadow: 0 20px 50px -20px rgba(212, 175, 55, .5);
+  border-color: rgba(212, 175, 55, .5);
 }
 
 .service-card__head {
@@ -906,14 +906,13 @@ h4 {
 }
 
 .service-card__body {
-  display: grid;
-  grid-template-rows: 0fr;
   overflow: hidden;
-  transition: grid-template-rows .7s cubic-bezier(.2, .7, .2, 1);
+  max-height: 0;
+  transition: max-height .4s cubic-bezier(.2, .7, .2, 1);
 }
 
 .service-card.is-open .service-card__body {
-  grid-template-rows: 1fr;
+  max-height: 300px;
 }
 
 .service-card__body-inner {
