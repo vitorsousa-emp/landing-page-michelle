@@ -105,12 +105,12 @@
 
   /* ---------- Services (expansíveis) ---------- */
   const SERVICES = [
-    { img: "images/img1.jpg", title: "Banda ao vivo", desc: "Do primeiro ao último acorde, a energia da noite é garantida. Estrutura completa de palco, iluminação e som profissional inclusos." },
-    { img: "images/img1.jpg", title: "Drinks ilimitados", desc: "Bar temático com drinques, drinks sem álcool e bebidas durante toda a noite. Sem limite, sem preocupação." },
-    { img: "images/img1.jpg", title: "Decoração exclusiva", desc: "Cenários elaborados para cada momento da noite: entrada, mesa dos formandos, área de fotos e muito mais." },
-    { img: "images/img1.jpg", title: "Brindes inclusos", desc: "Foto do formando no painel de entrada · Brinde de champanhe no cerimonial · Prisma de identificação na mesa · Descontos com parceiros (vestido, terno, maquiagem e muito mais)." },
-    { img: "images/img1.jpg", title: "Cobertura fotográfica", desc: "Cada abraço, cada lágrima, cada sorriso registrado por fotógrafo profissional. Memórias que você vai querer guardar para sempre." },
-    { img: "images/img1.jpg", title: "Buffet completo", desc: "Uma noite inesquecível também passa pelo paladar. Cardápio sofisticado pensado para agradar todos os seus convidados." },
+    { img: "images/banda-img.jpg", title: "Banda ao vivo", desc: "Do primeiro ao último acorde, a energia da noite é garantida. Estrutura completa de palco, iluminação e som profissional inclusos." },
+    { img: "images/drinks-img.jpg", title: "Drinks ilimitados", desc: "Bar temático com drinques, drinks sem álcool e bebidas durante toda a noite. Sem limite, sem preocupação." },
+    { img: "images/decoracao.jpg", title: "Decoração exclusiva", desc: "Cenários elaborados para cada momento da noite: entrada, mesa dos formandos, área de fotos e muito mais." },
+    { img: "images/formanda-tela.jpeg", title: "Brindes inclusos", desc: "Foto do formando no painel de entrada · Brinde de champanhe no cerimonial · Prisma de identificação na mesa · Descontos com parceiros (vestido, terno, maquiagem e muito mais)." },
+    { img: "images/geral-da-turma.jpg", title: "Cobertura fotográfica", desc: "Cada abraço, cada lágrima, cada sorriso registrado por fotógrafo profissional. Memórias que você vai querer guardar para sempre." },
+    { img: "images/buffet.png", title: "Buffet completo", desc: "Uma noite inesquecível também passa pelo paladar. Cardápio sofisticado pensado para agradar todos os seus convidados." },
   ];
 
   function renderServices() {
@@ -146,7 +146,6 @@
     });
   }
 
-  /* ---------- Testimonials (mensagens WhatsApp-like) ---------- */
   /* ---------- Testimonials (cards arrastáveis) ---------- */
   const MESSAGES = [
     { name: "Isabela R.", time: "Formanda em Direito", stars: 5, text: "Minha turma não quis fazer formatura. Decidi não abrir mão da minha noite. Foi a melhor decisão que tomei." },
@@ -265,15 +264,14 @@
     });
   }
 
-  /* ---------- Gallery + Lightbox ---------- */
   /* ---------- Gallery — painel de histórias interativo ---------- */
   const GALLERY = [
-    { src: "images/gallery-1.jpg", title: "A entrada", },
-    { src: "images/gallery-2.jpg", title: "A mesa de gala", desc: "Cenário pensado para reunir formandos e família num único brinde." },
-    { src: "images/gallery-4.jpg", title: "O pôr do sol", desc: "Fotos que ficam para sempre, no horário em que a luz é mais bonita." },
-    { src: "images/gallery-3.jpg", title: "O brinde de ouro", desc: "Champanhe, folhas douradas e o sabor da conquista." },
-    { src: "images/hero-event.jpg", title: "A noite", desc: "Velas, flores bordô e a atmosfera que transforma uma festa em memória." },
-    { src: "images/about-event.jpg", title: "O encontro", desc: "Pessoas que se conhecem ou não, unidas por uma mesma celebração." },
+    { src: "images/etapa1.jpg", title: "A entrada", },
+    { src: "images/etapa2.jpg", title: "A mesa de gala", desc: "Cenário pensado para reunir formandos e família num único brinde." },
+    { src: "images/etapa3.jpg", title: "O pôr do sol", desc: "Fotos que ficam para sempre, no horário em que a luz é mais bonita." },
+    { src: "images/etapa4.jpg", title: "O brinde de ouro", desc: "Champanhe, folhas douradas e o sabor da conquista." },
+    { src: "images/etapa5.jpg", title: "A noite", desc: "Velas, flores bordô e a atmosfera que transforma uma festa em memória." },
+    { src: "images/etapa6.jpg", title: "O encontro", desc: "Pessoas que se conhecem ou não, unidas por uma mesma celebração." },
   ];
 
   function renderGallery() {

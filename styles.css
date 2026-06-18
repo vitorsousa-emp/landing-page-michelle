@@ -520,15 +520,15 @@ h4 {
   align-items: center;
   justify-content: center;
   text-align: center;
-  padding: 6rem 1.5rem 3rem;
+  padding: 6rem 2rem 3rem;
 }
 
 .hero__logo {
 
-  width: min(260px, 70vw);
+  width: min(160px, 45vw);
   height: auto;
   object-fit: contain;
-  margin-bottom: 2rem;
+  margin-bottom: 1.5rem;
   animation: logo-in 1.6s .4s cubic-bezier(.2, .7, .2, 1) both;
   filter: drop-shadow(0 12px 30px rgba(212, 175, 55, .25));
 
@@ -552,8 +552,8 @@ h4 {
 
 @media (min-width: 640px) {
   .hero__logo {
-    width: 128px;
-    height: 128px;
+    width: min(220px, 30vw);
+    height: auto;
   }
 }
 
@@ -579,6 +579,15 @@ h4 {
 
 .hero__title span:first-child {
   color: var(--cream);
+}
+
+@media (max-width: 639px) {
+  .hero__title {
+    font-size: clamp(1.6rem, 6vw, 2.2rem);
+  }
+  .hero__title .italic {
+    font-size: clamp(1.8rem, 7vw, 2.5rem);
+  }
 }
 
 @media (min-width: 640px) {
