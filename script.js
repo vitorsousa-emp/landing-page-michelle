@@ -120,13 +120,13 @@
     SERVICES.forEach((s, i) => {
       const wrap = document.createElement("div");
       wrap.className = "reveal";
-      wrap.dataset.delay = String(i * 80);
+      wrap.dataset.delay = String(i * 40);
       wrap.innerHTML = `
       <button type="button" class="service-card">
         <div class="service-card__head">
           <div>
-            <img src="${s.img}" alt="${s.title}" class="service-card__img" />
-            <h3 class="service-card__title"><span class="italic text-shimmer2"> ${s.title}</span></h3>
+            <img src="${s.img}" alt="${s.title}" class="service-card__img" loading="lazy" decoding="async" />
+            <h3 class="service-card__title"><span class="italic"> ${s.title}</span></h3>
           </div>
           <span class="service-card__toggle" aria-hidden="true">+</span>
         </div>
