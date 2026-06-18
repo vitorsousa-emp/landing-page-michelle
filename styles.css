@@ -162,8 +162,8 @@ h4 {
   }
 }
 
-/* Gold shimmering text */
-.text-shimmer {
+/* Gold shimmering text  
+/* .text-shimmer {
   background: linear-gradient(100deg,
       var(--burgundy) 0%, var(--champagne) 25%, #fff8e0 45%,
       var(--champagne) 60%, var(--burgundy) 100%);
@@ -172,7 +172,7 @@ h4 {
   background-clip: text;
   color: transparent;
   animation: shimmer 6s linear infinite;
-}
+}*/
 
 .text-shimmer2 {
   background: linear-gradient(100deg,
