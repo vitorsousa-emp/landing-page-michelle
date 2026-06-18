@@ -420,6 +420,15 @@ h4 {
   border-bottom-color: rgba(212, 175, 55, .25);
 }
 
+@media (max-width: 639px) {
+  .nav.is-scrolled {
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+    background-color: rgba(13, 13, 13, 0.95);
+    /* compensa com opacidade maior */
+  }
+}
+
 .nav__inner {
   max-width: 72rem;
   margin-inline: auto;
@@ -590,6 +599,7 @@ h4 {
     font-size: clamp(1.7rem, 7.5vw, 2.4rem);
     font-weight: 800;
   }
+
   .hero__title .italic {
     font-size: clamp(1.9rem, 8.5vw, 2.6rem);
     font-weight: 800;
@@ -853,7 +863,7 @@ h4 {
   gap: 1rem;
 }
 
-.service-card__head > div {
+.service-card__head>div {
   display: flex;
   align-items: center;
   gap: clamp(0.5rem, 2vw, 0.75rem);
@@ -1444,7 +1454,9 @@ h4 {
     gap: 0.5rem;
   }
 
-  .gallery-panels::-webkit-scrollbar { display: none; }
+  .gallery-panels::-webkit-scrollbar {
+    display: none;
+  }
 
   .gallery-panel {
     flex: 0 0 82vw;
@@ -1472,8 +1484,13 @@ h4 {
     white-space: normal;
   }
 
-  .gallery-panel .gallery-panel__desc { display: block; }
-  .gallery-panel .gallery-panel__hint { display: none; }
+  .gallery-panel .gallery-panel__desc {
+    display: block;
+  }
+
+  .gallery-panel .gallery-panel__hint {
+    display: none;
+  }
 
   /* hint de toque no card ativo */
   .gallery-panel.is-active::after {
@@ -1494,6 +1511,7 @@ h4 {
 .gallery-dots {
   display: none;
 }
+
 @media (max-width: 767px) {
   .gallery-dots {
     display: flex;
@@ -1502,13 +1520,16 @@ h4 {
     margin-top: 1.25rem;
   }
 }
+
 .gallery-dot {
-  width: 6px; height: 6px;
+  width: 6px;
+  height: 6px;
   border-radius: 999px;
   background: rgba(212, 175, 55, .25);
   cursor: pointer;
   transition: all .35s;
 }
+
 .gallery-dot.is-active {
   background: var(--gold);
   width: 20px;

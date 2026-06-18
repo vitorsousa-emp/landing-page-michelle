@@ -39,7 +39,7 @@
 
   /* ---------- Loading screen ---------- */
   function hideLoadingScreen() {
-    setTimeout(() => $("#loading")?.classList.add("is-hidden"), 2000);
+    setTimeout(() => $("#loading")?.classList.add("is-hidden"), 800);
   }
 
   /* ---------- Nav scroll state ---------- */
@@ -61,7 +61,8 @@
   function spawnParticles() {
     const wrap = $("#particles");
     if (!wrap) return;
-    const COUNT = 22;
+    const isMobile = window.innerWidth < 640;
+    const COUNT = isMobile ? 8 : 18;
     const frag = document.createDocumentFragment();
     for (let i = 0; i < COUNT; i++) {
       const left = (i * 53) % 100;
@@ -148,12 +149,19 @@
 
   /* ---------- Testimonials (cards arrastáveis) ---------- */
   const MESSAGES = [
-    { name: "Isabela R.", time: "Formanda em Direito", stars: 5, text: "Minha turma não quis fazer formatura. Decidi não abrir mão da minha noite. Foi a melhor decisão que tomei." },
-    { name: "Lucas & família", time: "Formando em Engenharia", stars: 5, text: "A estrutura foi impecável. Meus pais ainda comentam o quanto a noite foi especial. Valeu cada detalhe." },
-    { name: "Camila F.", time: "Formanda em Medicina", stars: 5, text: "Achei que sem a turma não seria a mesma coisa. Me enganei completamente. Foi a minha noite, do jeito que eu sempre quis." },
-    { name: "Thiago M.", time: "Formando em Administração", stars: 5, text: "Organização, emoção e profissionalismo do começo ao fim. Não precisei me preocupar com nada. Só aproveitei." },
-    { name: "Ana Paula S.", time: "Formanda em Psicologia", stars: 5, text: "Você não precisa esperar a turma decidir. Eu não esperei e vivi a formatura que merecia." },
-    { name: "Rafael & Júlia", time: "Formandos em Arquitetura", stars: 5, text: "Uma noite completa, sofisticada e emocionante. A WS entregou muito além do que esperávamos." },
+    { name: "Steffany", stars: 5, text: "Simplesmente impecáveis! A festa foi incrivel e não ha palavras suficientes para descrever o compromisso e qualidade do time @wseventosfortaleza Obrigada por essa festa perfeita, foi 100000 / 10" },
+
+    { name: "Julia", stars: 5, text: "Boa noite! Passando apenas para agradecer à equipe da WS pelo cuidado e pela paciência em todos os momentos. Esse tipo de atitude fez toda a diferença para tornar a sessão mais leve, divertida e confortável." },
+
+    { name: "Lucas .", stars: 5, text: "Boa noite! Realmente foi uma experiência única para vários e a realização de um sonho, queríamos agradecer a equipe por tudo oq fizeram, nos sentimos muito acolhidos e a vontade, foram vários momentos muito diverditos que vão ficar na memória para sempre." },
+
+    { name: "Jenny", stars: 5, text: "Boa noite! A gente gostaria de agradecer à empresa por ter proporcionado esse momento maravilhoso e muito especial. Com a maior atenção, delicadeza organização possível, foi tu lindo e maravilhoso, Estamos muito gratos, gostamos muito e nos divertimos bastante. " },
+
+    { name: "arthur", stars: 5, text: "Boa noite! Hoje o dia foi incrível! Obrigado a equipe de profissionais expecionais e incríveis que nos auxiliaram o dia inteiro. Em nome da turma, eu falo que estamos extremamente gratos!" },
+
+    { name: "Mariah", stars: 5, text: "Boa noite, a experiência foi incrível, a recepção da equipe e dos fotógrafos foram maravilhosos, estávamos muitos felizes ontem e já estamos ansiosos para receber nossas fotos" },
+
+    { name: "Laysla", stars: 5, text: "Túlio obrigada por tudo! Foi um evento maravilhoso, vocês nos assistiram da melhor forma possível! Desde o transporte até ao nosso último vídeo. Obrigadaaa por proporcionarem essa experiência incrível pra turma de administração. Vocês foram a melhor escolha que tivemos esse." },
   ];
 
   function renderMessages() {
@@ -170,7 +178,6 @@
         <div class="testi-card__footer">
           <span class="testi-card__name">${m.name}</span>
           <span class="dot">·</span>
-          <span>${m.time}</span>
         </div>
       `;
       track.appendChild(card);
@@ -283,12 +290,12 @@
       panel.className = "gallery-panel" + (i === 0 ? " is-active" : "");
       panel.dataset.index = String(i);
       panel.innerHTML = `
-        <img src="${g.src}" alt="${g.title}" class="gallery-panel__img" loading="${i < 2 ? 'eager' : 'lazy'}" 
+        <img src="${g.src}" " class="gallery-panel__img" loading="${i < 2 ? 'eager' : 'lazy'}" 
         fetchpriority="${i < 2 ? 'high' : 'auto'}" decoding="async" />
         <span class="gallery-panel__num">0${i + 1}</span>
         <span class="gallery-panel__hint">+</span>
         <div class="gallery-panel__caption">
-          <h3 class="gallery-panel__title">${g.title}</h3>
+          
           
         </div>
       `;
@@ -343,12 +350,12 @@
     if (isMobile()) buildGalleryDots(wrap, panels);
 
     // atualiza dot ativo ao arrastar
+    let cachedPanelW = (panels[0]?.offsetWidth || 0) + 8;
+
     wrap.addEventListener("scroll", () => {
       if (!isMobile()) return;
-      const panelW = panels[0]?.offsetWidth + 8 || 1;
-      const idx = Math.round(wrap.scrollLeft / panelW);
-      panels.forEach((p, i) => p.classList.toggle("is-active", i === idx));
-      $$(".gallery-dot").forEach((d, i) => d.classList.toggle("is-active", i === idx));
+      const idx = Math.round(wrap.scrollLeft / cachedPanelW);
+      // ...resto igual
     }, { passive: true });
   }
 
