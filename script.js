@@ -19,12 +19,12 @@
     setYear();
     hideLoadingScreen();
     bindNavScroll();
-    renderGallery();        // ← movido para o início, prioridade no carregamento
+    bindRevealOnScroll();   // ← primeiro: cria o observer
+    renderGallery();
     spawnParticles();
     renderServices();
     renderMessages();
     renderDiffs();
-    bindRevealOnScroll();
     bindVideoModal();
     bindLightbox();
     bindFloatingCTA();
@@ -82,26 +82,32 @@
   }
 
   /* ---------- Reveal-on-scroll (IntersectionObserver) ---------- */
+  let revealIO = null;
+
   function bindRevealOnScroll() {
-    const els = $$(".reveal");
     if (!("IntersectionObserver" in window)) {
-      els.forEach((el) => el.classList.add("is-in"));
+      $$(".reveal").forEach((el) => el.classList.add("is-in"));
       return;
     }
-    const io = new IntersectionObserver(
+    revealIO = new IntersectionObserver(
       (entries) => {
         entries.forEach((e) => {
           if (e.isIntersecting) {
             const delay = parseInt(e.target.dataset.delay || "0", 10);
             e.target.style.transitionDelay = delay + "ms";
             e.target.classList.add("is-in");
-            io.unobserve(e.target);
+            revealIO.unobserve(e.target);
           }
         });
       },
-      { threshold: 0.15 }
+      { threshold: 0, rootMargin: "0px 0px -60px 0px" }
     );
-    els.forEach((el) => io.observe(el));
+    $$(".reveal").forEach((el) => revealIO.observe(el));
+  }
+
+  function observeNewReveals(container) {
+    if (!revealIO) return;
+    $$(".reveal", container).forEach((el) => revealIO.observe(el));
   }
 
   /* ---------- Services (expansíveis) ---------- */
@@ -109,8 +115,8 @@
     { img: "images/banda-img.jpg", title: "Banda ao vivo", desc: "Do primeiro ao último acorde, a energia da noite é garantida. Estrutura completa de palco, iluminação e som profissional inclusos." },
     { img: "images/drinks-img.jpg", title: "Drinks ilimitados", desc: "Bar temático com drinques, drinks sem álcool e bebidas durante toda a noite. Sem limite, sem preocupação." },
     { img: "images/decoracao.jpg", title: "Decoração exclusiva", desc: "Cenários elaborados para cada momento da noite: entrada, mesa dos formandos, área de fotos e muito mais." },
-    { img: "images/formanda-tela.jpeg", title: "Brindes inclusos", desc: "Foto do formando no painel de entrada · Brinde de champanhe no cerimonial · Prisma de identificação na mesa · Descontos com parceiros (vestido, terno, maquiagem e muito mais)." },
-    { img: "images/geral-da-turma.jpg", title: "Cobertura fotográfica", desc: "Cada abraço, cada lágrima, cada sorriso registrado por fotógrafo profissional. Memórias que você vai querer guardar para sempre." },
+    { img: "images/brindes.jpeg", title: "Brindes inclusos", desc: "Foto do formando no painel de entrada · Brinde de champanhe no cerimonial · Prisma de identificação na mesa · Descontos com parceiros (vestido, terno, maquiagem e muito mais)." },
+    { img: "images/fotografico.jpeg", title: "Cobertura fotográfica", desc: "Cada abraço, cada lágrima, cada sorriso registrado por fotógrafo profissional. Memórias que você vai querer guardar para sempre." },
     { img: "images/buffet.png", title: "Buffet completo", desc: "Uma noite inesquecível também passa pelo paladar. Cardápio sofisticado pensado para agradar todos os seus convidados." },
   ];
 
@@ -145,23 +151,17 @@
       });
       grid.appendChild(wrap);
     });
+    observeNewReveals(grid);
   }
 
   /* ---------- Testimonials (cards arrastáveis) ---------- */
   const MESSAGES = [
     { name: "Steffany", stars: 5, text: "Simplesmente impecáveis! A festa foi incrivel e não ha palavras suficientes para descrever o compromisso e qualidade do time @wseventosfortaleza Obrigada por essa festa perfeita, foi 100000 / 10" },
-
     { name: "Julia", stars: 5, text: "Boa noite! Passando apenas para agradecer à equipe da WS pelo cuidado e pela paciência em todos os momentos. Esse tipo de atitude fez toda a diferença para tornar a sessão mais leve, divertida e confortável." },
-
     { name: "Lucas .", stars: 5, text: "Boa noite! Realmente foi uma experiência única para vários e a realização de um sonho, queríamos agradecer a equipe por tudo oq fizeram, nos sentimos muito acolhidos e a vontade, foram vários momentos muito diverditos que vão ficar na memória para sempre." },
-
     { name: "Jenny", stars: 5, text: "Boa noite! A gente gostaria de agradecer à empresa por ter proporcionado esse momento maravilhoso e muito especial. Com a maior atenção, delicadeza organização possível, foi tu lindo e maravilhoso, Estamos muito gratos, gostamos muito e nos divertimos bastante. " },
-
     { name: "arthur", stars: 5, text: "Boa noite! Hoje o dia foi incrível! Obrigado a equipe de profissionais expecionais e incríveis que nos auxiliaram o dia inteiro. Em nome da turma, eu falo que estamos extremamente gratos!" },
-
     { name: "Mariah", stars: 5, text: "Boa noite, a experiência foi incrível, a recepção da equipe e dos fotógrafos foram maravilhosos, estávamos muitos felizes ontem e já estamos ansiosos para receber nossas fotos" },
-
-    { name: "Laysla", stars: 5, text: "Túlio obrigada por tudo! Foi um evento maravilhoso, vocês nos assistiram da melhor forma possível! Desde o transporte até ao nosso último vídeo. Obrigadaaa por proporcionarem essa experiência incrível pra turma de administração. Vocês foram a melhor escolha que tivemos esse." },
   ];
 
   function renderMessages() {
@@ -177,7 +177,6 @@
         <p class="testi-card__text">"${m.text}"</p>
         <div class="testi-card__footer">
           <span class="testi-card__name">${m.name}</span>
-          <span class="dot">·</span>
         </div>
       `;
       track.appendChild(card);
@@ -193,6 +192,10 @@
     }
 
     bindDraggableTrack(track, dotsWrap);
+
+    // garante que o container pai (.testi-track-wrap.reveal) apareça
+    const wrap = track.closest(".testi-track-wrap");
+    if (wrap && revealIO) revealIO.observe(wrap);
   }
 
   /* ---------- Drag-to-scroll (mouse) + swipe nativo (touch) ---------- */
@@ -231,6 +234,35 @@
     track.addEventListener("scroll", () => {
       window.requestAnimationFrame(updateActiveDot);
     }, { passive: true });
+
+    // Navegação por setas (desktop only)
+    const wrap2 = track.parentElement;
+    const prevBtn = document.createElement("button");
+    const nextBtn = document.createElement("button");
+    prevBtn.className = "testi-arrow testi-arrow--prev is-disabled";
+    prevBtn.innerHTML = "‹";
+    prevBtn.setAttribute("aria-label", "Anterior");
+    nextBtn.className = "testi-arrow testi-arrow--next";
+    nextBtn.innerHTML = "›";
+    nextBtn.setAttribute("aria-label", "Próximo");
+    wrap2.appendChild(prevBtn);
+    wrap2.appendChild(nextBtn);
+
+    let desktopIndex = 0;
+    const PER_PAGE = 3;
+    const total = track.children.length;
+    const pages = Math.ceil(total / PER_PAGE);
+
+    function goToPage(page) {
+      desktopIndex = Math.max(0, Math.min(page, pages - 1));
+      const cardW = track.children[0]?.offsetWidth + 24 || 0;
+      track.style.transform = `translateX(-${desktopIndex * PER_PAGE * cardW}px)`;
+      prevBtn.classList.toggle("is-disabled", desktopIndex === 0);
+      nextBtn.classList.toggle("is-disabled", desktopIndex >= pages - 1);
+    }
+
+    prevBtn.addEventListener("click", () => goToPage(desktopIndex - 1));
+    nextBtn.addEventListener("click", () => goToPage(desktopIndex + 1));
   }
 
   /* ---------- Differentials ---------- */
@@ -269,6 +301,7 @@
       });
       grid.appendChild(item);
     });
+    observeNewReveals(grid);
   }
 
   /* ---------- Gallery — painel de histórias interativo ---------- */
@@ -279,6 +312,10 @@
     { src: "images/etapa4.jpg", title: "O brinde de ouro", desc: "Champanhe, folhas douradas e o sabor da conquista." },
     { src: "images/etapa5.jpg", title: "A noite", desc: "Velas, flores bordô e a atmosfera que transforma uma festa em memória." },
     { src: "images/etapa6.jpg", title: "O encontro", desc: "Pessoas que se conhecem ou não, unidas por uma mesma celebração." },
+    { src: "images/etapa7.jpg" },
+    { src: "images/etapa8.jpg" },
+    { src: "images/etapa9.jpg" },
+    { src: "images/etapa10.jpg" },
   ];
 
   function renderGallery() {
@@ -390,8 +427,7 @@
   function bindVideoModal() {
     const modal = $("#video-modal");
     const iframe = $("#video-iframe");
-    const SRC = "https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1&rel=0";
-
+    const SRC = "https://www.youtube.com/embed/n-0AUck4Vl4?autoplay=1&rel=0&modestbranding=1";
     $("#video-open").addEventListener("click", () => {
       iframe.src = SRC;
       openModal(modal);

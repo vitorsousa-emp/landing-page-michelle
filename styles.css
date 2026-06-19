@@ -206,6 +206,7 @@ h4 {
   transform: translateY(20px);
   transition: opacity 0.55s cubic-bezier(.2, .7, .2, 1),
     transform 0.55s cubic-bezier(.2, .7, .2, 1);
+  will-change: opacity, transform;
 }
 
 .reveal.is-in {
@@ -825,10 +826,38 @@ h4 {
 }
 
 @media (min-width: 1024px) {
-  .services__grid {
-    grid-template-columns: 1fr 1fr 1fr;
+  .testi-track-wrap {
+    overflow: visible !important;
+    width: 100%;
+    max-width: 1200px;
+    margin-inline: auto;
+    padding-inline: 2rem;
   }
+
+  .testi-track {
+    display: grid !important;
+    grid-template-columns: repeat(3, 1fr) !important;
+    overflow: visible !important;
+    scroll-snap-type: none !important;
+    cursor: default !important;
+    gap: 1.5rem;
+    padding: 0.5rem 0 1.5rem;
+    transform: none !important;
+  }
+
+  .testi-card {
+    flex: unset !important;
+    width: 100% !important;
+    max-width: unset !important;
+    scroll-snap-align: unset !important;
+  }
+
+  .testi-dots { display: none !important; }
+  .testi-arrow { display: none !important; }
 }
+
+/* setas — ocultas, mantidas apenas para não quebrar o JS */
+.testi-arrow { display: none !important; }
 
 .service-card__img {
   width: clamp(60px, 18vw, 80px);
@@ -1152,12 +1181,6 @@ h4 {
 
   .testi-track {
     padding-inline: 2rem;
-  }
-}
-
-@media (min-width: 1024px) {
-  .testi-track {
-    justify-content: center;
   }
 }
 
