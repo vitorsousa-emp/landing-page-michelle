@@ -314,8 +314,8 @@
     { src: "images/etapa6.jpg", title: "O encontro", desc: "Pessoas que se conhecem ou não, unidas por uma mesma celebração." },
     { src: "images/etapa7.jpg" },
     { src: "images/etapa8.jpg" },
-    { src: "images/etapa9.jpg" },
-    { src: "images/etapa10.jpg" },
+    { src: "images/etapa9.JPG" },
+    { src: "images/etapa10.JPG" },
   ];
 
   function renderGallery() {
