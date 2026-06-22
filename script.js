@@ -317,6 +317,7 @@
     { src: "images/etapa9.JPG" },
     { src: "images/etapa10.JPG" },
   ];
+  
 
   function renderGallery() {
     const wrap = $("#gallery");
