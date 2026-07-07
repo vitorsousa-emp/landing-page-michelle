@@ -273,6 +273,7 @@
     { i: "❀", t: "Segurança e planejamento garantidos", d: "Mais de 22.000 eventos realizados. Você está em mãos experientes, do primeiro contato ao último brinde." },
     { i: "✦", t: "Tudo incluso, sem surpresas", d: "Banda, buffet, open bar, decoração, foto e brindes. Uma única adesão, uma noite completa." },
     { i: "❖", t: "Uma noite feita para você", d: "Do primeiro brinde à última música, cada detalhe é pensado para que você viva a formatura que merece." },
+    { i: "❖", t: "Sem taxa extra e sem risco de cancelamento", d: "Sua única preocupação será aproveitar cada instante. Nós cuidamos de todo o resto com excelência e dedicação.", bold: true, underline: true },
   ];
 
   function renderDiffs() {
@@ -285,7 +286,7 @@
       item.innerHTML = `
       <div class="diff__head">
         <div class="diff__num">0${i + 1}</div>
-        <h3 class="diff__title">${d.t}</h3>
+        <h3 class="diff__title">${d.bold ? `<u><strong>${d.t}</strong></u>` : d.t}</h3>
         <div class="diff__arrow">+</div>
       </div>
       <div class="diff__body">
@@ -317,7 +318,9 @@
     { src: "images/etapa9.JPG" },
     { src: "images/etapa10.JPG" },
   ];
-  
+
+  /* ---------- Índice atual do lightbox (compartilhado entre openLightbox e bindLightbox) ---------- */
+  let currentLightboxIdx = 0;
 
   function renderGallery() {
     const wrap = $("#gallery");
@@ -328,14 +331,11 @@
       panel.className = "gallery-panel" + (i === 0 ? " is-active" : "");
       panel.dataset.index = String(i);
       panel.innerHTML = `
-        <img src="${g.src}" " class="gallery-panel__img" loading="${i < 2 ? 'eager' : 'lazy'}" 
+        <img src="${g.src}" class="gallery-panel__img" loading="${i < 2 ? 'eager' : 'lazy'}" 
         fetchpriority="${i < 2 ? 'high' : 'auto'}" decoding="async" />
         <span class="gallery-panel__num">0${i + 1}</span>
         <span class="gallery-panel__hint">+</span>
-        <div class="gallery-panel__caption">
-          
-          
-        </div>
+        <div class="gallery-panel__caption"></div>
       `;
       wrap.appendChild(panel);
     });
@@ -347,12 +347,13 @@
     const panels = $$(".gallery-panel", wrap);
     const isMobile = () => window.matchMedia("(max-width: 767px)").matches;
 
+    // openLightbox fica aqui, onde os painéis a chamam
     const openLightbox = (idx) => {
-      const item = GALLERY[idx];
+      currentLightboxIdx = idx;
       const modal = $("#lightbox");
       const img = $("#lightbox-img");
-      img.src = item.src;
-      img.alt = item.title;
+      img.src = GALLERY[idx].src;
+      img.alt = GALLERY[idx].title || "";
       openModal(modal);
     };
 
@@ -418,12 +419,56 @@
     wrap.parentElement.appendChild(dots);
   }
 
+  /* ---------- Lightbox com swipe (touch) + setas visuais (desktop) ---------- */
   function bindLightbox() {
     const modal = $("#lightbox");
+    const img = $("#lightbox-img");
+
+    function navigate(direction) {
+      currentLightboxIdx = direction > 0
+        ? (currentLightboxIdx + 1) % GALLERY.length
+        : (currentLightboxIdx - 1 + GALLERY.length) % GALLERY.length;
+      img.src = GALLERY[currentLightboxIdx].src;
+      img.alt = GALLERY[currentLightboxIdx].title || "";
+    }
+
+    // Cria setas visuais
+    const prevBtn = document.createElement("button");
+    const nextBtn = document.createElement("button");
+    prevBtn.className = "lightbox-arrow lightbox-arrow--prev";
+    nextBtn.className = "lightbox-arrow lightbox-arrow--next";
+    prevBtn.innerHTML = "&#8249;";
+    nextBtn.innerHTML = "&#8250;";
+    prevBtn.setAttribute("aria-label", "Foto anterior");
+    nextBtn.setAttribute("aria-label", "Próxima foto");
+    modal.appendChild(prevBtn);
+    modal.appendChild(nextBtn);
+
+    prevBtn.addEventListener("click", () => navigate(-1));
+    nextBtn.addEventListener("click", () => navigate(1));
+
+    // Fecha ao clicar no fundo ou no botão X
     modal.addEventListener("click", (e) => {
       if (e.target === modal || e.target.dataset.close !== undefined) closeModal(modal);
     });
+
+    // Swipe touch (mobile)
+    let startX = 0;
+    img.addEventListener("touchstart", (e) => { startX = e.touches[0].clientX; }, { passive: true });
+    img.addEventListener("touchend", (e) => {
+      const diff = startX - e.changedTouches[0].clientX;
+      if (Math.abs(diff) < 40) return;
+      navigate(diff > 0 ? 1 : -1);
+    });
+
+    // Setas do teclado (desktop)
+    document.addEventListener("keydown", (e) => {
+      if (!modal.classList.contains("is-open")) return;
+      if (e.key === "ArrowRight") navigate(1);
+      if (e.key === "ArrowLeft") navigate(-1);
+    });
   }
+
   /* ---------- Video modal ---------- */
   function bindVideoModal() {
     const modal = $("#video-modal");

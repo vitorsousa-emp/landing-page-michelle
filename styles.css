@@ -124,6 +124,17 @@ h4 {
   margin-bottom: 1rem;
 }
 
+.eyebrow--lg {
+  font-size: 0.95rem;
+  letter-spacing: 0.4em;
+}
+
+@media (min-width: 640px) {
+  .eyebrow--lg {
+    font-size: 1.1rem;
+  }
+}
+
 .h2 {
   text-align: center;
   font-size: clamp(1.75rem, 7vw, 1.875rem);
@@ -1276,6 +1287,7 @@ h4 {
   font-size: 1.2rem;
   color: var(--cream);
   transition: color .4s;
+  
 }
 
 .diff.is-open .diff__title {
@@ -1320,7 +1332,7 @@ h4 {
 }
 
 .diff__desc {
-  font-size: 0.9rem;
+  font-size: 1.2rem;
   line-height: 1.7;
   color: rgba(247, 245, 242, .6);
 }
@@ -1848,4 +1860,63 @@ h4 {
   border: 1px solid rgba(212, 175, 55, .4);
   box-shadow: 0 25px 50px -12px rgba(0, 0, 0, .5);
   object-fit: contain;
+}
+
+/* =================== LIGHTBOX ARROWS (desktop only) =================== */
+.lightbox-arrow {
+  display: none;
+}
+
+@media (min-width: 768px) {
+  .lightbox-arrow {
+    display: grid;
+    place-items: center;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 3;
+    width: 52px;
+    height: 52px;
+    border-radius: 999px;
+    border: 1px solid rgba(212, 175, 55, .35);
+    background: rgba(13, 13, 13, .55);
+    -webkit-backdrop-filter: blur(6px);
+    backdrop-filter: blur(6px);
+    color: var(--champagne);
+    font-size: 1.75rem;
+    line-height: 1;
+    cursor: pointer;
+    transition: background-color .3s, border-color .3s, color .3s,
+      transform .3s, box-shadow .3s;
+  }
+
+  .lightbox-arrow:hover {
+    background: rgba(212, 175, 55, .12);
+    border-color: var(--gold);
+    color: var(--gold);
+    box-shadow: 0 10px 30px -10px rgba(212, 175, 55, .5);
+    transform: translateY(-50%) scale(1.06);
+  }
+
+  .lightbox-arrow:active {
+    transform: translateY(-50%) scale(.96);
+  }
+
+  .lightbox-arrow--prev {
+    left: 1.5rem;
+  }
+
+  .lightbox-arrow--next {
+    right: 1.5rem;
+  }
+}
+
+@media (min-width: 1200px) {
+  .lightbox-arrow--prev {
+    left: 2.5rem;
+  }
+
+  .lightbox-arrow--next {
+    right: 2.5rem;
+  }
 }
