@@ -313,10 +313,15 @@
     { src: "images/etapa4.jpg", title: "O brinde de ouro", desc: "Champanhe, folhas douradas e o sabor da conquista." },
     { src: "images/etapa5.jpg", title: "A noite", desc: "Velas, flores bordô e a atmosfera que transforma uma festa em memória." },
     { src: "images/etapa6.jpg", title: "O encontro", desc: "Pessoas que se conhecem ou não, unidas por uma mesma celebração." },
-    { src: "images/etapa7.jpg" },
     { src: "images/etapa8.jpg" },
     { src: "images/etapa9.JPG" },
     { src: "images/etapa10.JPG" },
+    { src: "images/etapa14.jpeg" },
+    { src: "images/etapa15.jpeg" },
+    { src: "images/etapa16.jpeg" },
+    { src: "images/etapa17.jpeg" },
+    { src: "images/etapa18.jpeg" },
+    { src: "images/etapa19.jpeg" },
   ];
 
   /* ---------- Índice atual do lightbox (compartilhado entre openLightbox e bindLightbox) ---------- */
