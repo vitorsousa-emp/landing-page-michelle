@@ -608,7 +608,7 @@ h4 {
 
 @media (max-width: 639px) {
   .hero__title {
-    font-size: clamp(1.7rem, 7.5vw, 2.4rem);
+    font-size: clamp(1.5rem, 6.2vw, 2.1rem);
     font-weight: 800;
   }
 
@@ -617,7 +617,7 @@ h4 {
   }
 
   .hero__title .italic {
-    font-size: clamp(1.9rem, 8.5vw, 2.6rem);
+    font-size: clamp(1.7rem, 7vw, 2.3rem);
     font-weight: 800;
   }
 }
